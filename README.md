@@ -1,2 +1,2 @@
-# TwitchWinCountUpdater
-Update your Twitch stream title with your current win counter.
+# Twitch Title Updater
+Update your Twitch stream title with dynamic data.
