@@ -7,8 +7,8 @@ namespace TwitchTitleUpdater.Service.TwitchBot
         /// <summary>
         ///     Connect bot to Twitch.
         /// </summary>
-        /// <param name="clientId">Client ID of the bot to connect.</param>
+        /// <param name="twitchUsername">Twitch Username of the bot to connect.</param>
         /// <param name="accessToken">Access token of the bot to connect.</param>
-        Task Connect(string clientId, string accessToken);
+        Task Connect(string twitchUsername, string accessToken);
     }
 }
