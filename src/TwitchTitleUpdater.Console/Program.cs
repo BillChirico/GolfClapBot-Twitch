@@ -1,12 +1,23 @@
-﻿using System;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using TwitchLib.Client;
+using TwitchLib.Client.Interfaces;
 
 namespace TwitchTitleUpdater.Console
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ConfigureServiceCollection(new ServiceCollection());
+
+            await Task.Delay(Timeout.Infinite);
+        }
+
+        private static void ConfigureServiceCollection(IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddSingleton<ITwitchClient, TwitchClient>();
         }
     }
 }
