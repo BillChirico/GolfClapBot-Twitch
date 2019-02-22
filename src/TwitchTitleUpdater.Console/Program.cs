@@ -17,7 +17,9 @@ namespace TwitchTitleUpdater.Console
 
         private static void ConfigureServiceCollection(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<ITwitchClient, TwitchClient>();
+            serviceCollection
+                .AddSingleton<ITwitchClient, TwitchClient>()
+                .BuildServiceProvider();
         }
     }
 }
