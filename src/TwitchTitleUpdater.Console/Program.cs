@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using TwitchLib.Client;
 using TwitchLib.Client.Interfaces;
+using TwitchTitleUpdater.Service.TwitchBot;
 
 namespace TwitchTitleUpdater.Console
 {
@@ -10,15 +11,19 @@ namespace TwitchTitleUpdater.Console
     {
         public static async Task Main(string[] args)
         {
-            ConfigureServiceCollection(new ServiceCollection());
+            var serviceCollection = ConfigureServiceCollection(new ServiceCollection());
+            var twitchBot = serviceCollection.GetRequiredService<ITwitchBot>();
+
+            await twitchBot.Connect("twitchUsername", "accessToken");
 
             await Task.Delay(Timeout.Infinite);
         }
 
-        private static void ConfigureServiceCollection(IServiceCollection serviceCollection)
+        private static ServiceProvider ConfigureServiceCollection(IServiceCollection serviceCollection)
         {
-            serviceCollection
+            return serviceCollection
                 .AddSingleton<ITwitchClient, TwitchClient>()
+                .AddSingleton<ITwitchBot, TwitchBot>()
                 .BuildServiceProvider();
         }
     }

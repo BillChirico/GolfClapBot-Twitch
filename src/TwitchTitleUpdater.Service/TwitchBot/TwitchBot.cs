@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
+using TwitchLib.Client.Models;
 
 namespace TwitchTitleUpdater.Service.TwitchBot
 {
@@ -13,9 +15,17 @@ namespace TwitchTitleUpdater.Service.TwitchBot
             _twitchClient = twitchClient;
         }
 
-        public Task Connect(string clientId, string accessToken)
+        public Task Connect(string twitchUsername, string accessToken)
         {
-            throw new NotImplementedException();
+            _twitchClient.Initialize(new ConnectionCredentials(twitchUsername, accessToken));
+            _twitchClient.OnLog += OnLog;
+            _twitchClient.Connect();
+            return Task.CompletedTask;
+        }
+
+        private void OnLog(object sender, OnLogArgs e)
+        {
+            Console.WriteLine($"{e.DateTime.ToString()}: {e.BotUsername} - {e.Data}");
         }
     }
 }
