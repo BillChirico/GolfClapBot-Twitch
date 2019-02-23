@@ -11,8 +11,8 @@
     <PackageReference Include="TwitchLib" Version="3.0.1" />
   </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\TwitchTitleUpdater.Service\TwitchTitleUpdater.Service.csproj"/>
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BapesBot.Service\BapesBot.Service.csproj" />
+  </ItemGroup>
 
 </Project>

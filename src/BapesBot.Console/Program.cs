@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using BapesBot.Service.TwitchBot;
 using Microsoft.Extensions.DependencyInjection;
 using TwitchLib.Client;
 using TwitchLib.Client.Interfaces;
-using TwitchTitleUpdater.Service.TwitchBot;
 
-namespace TwitchTitleUpdater.Console
+namespace BapesBot.Console
 {
     internal class Program
     {

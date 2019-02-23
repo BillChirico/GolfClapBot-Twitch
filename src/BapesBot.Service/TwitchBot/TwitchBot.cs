@@ -1,10 +1,11 @@
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
 using TwitchLib.Client.Models;
 
-namespace TwitchTitleUpdater.Service.TwitchBot
+namespace BapesBot.Service.TwitchBot
 {
     public class TwitchBot : ITwitchBot
     {
@@ -25,7 +26,7 @@ namespace TwitchTitleUpdater.Service.TwitchBot
 
         private void OnLog(object sender, OnLogArgs e)
         {
-            Console.WriteLine($"{e.DateTime.ToString()}: {e.BotUsername} - {e.Data}");
+            Console.WriteLine($"{e.DateTime.ToString(CultureInfo.InvariantCulture)}: {e.BotUsername} - {e.Data}");
         }
     }
 }

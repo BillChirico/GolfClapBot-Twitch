@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace TwitchTitleUpdater.Service.TwitchBot
+namespace BapesBot.Service.TwitchBot
 {
     public interface ITwitchBot
     {
