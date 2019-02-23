@@ -4,7 +4,7 @@ using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
 using TwitchLib.Client.Models;
 
-namespace TwitchTitleUpdater.Service.TwitchBot
+namespace BapesBot.Service.TwitchBot
 {
     public class TwitchBot : ITwitchBot
     {

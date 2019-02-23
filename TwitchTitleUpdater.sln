@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchTitleUpdater.Console", "src\TwitchTitleUpdater.Console\TwitchTitleUpdater.Console.csproj", "{1CBF9FA6-9BF4-4FF3-B3B2-79AF75C53B27}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BapesBot.Console", "src\BapesBot.Console\BapesBot.Console.csproj", "{1CBF9FA6-9BF4-4FF3-B3B2-79AF75C53B27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchTitleUpdater.Domain", "src\TwitchTitleUpdater.Domain\TwitchTitleUpdater.Domain.csproj", "{89DEC613-7410-43DE-A844-0DF3E0232D4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BapesBot.Domain", "src\BapesBot.Domain\BapesBot.Domain.csproj", "{89DEC613-7410-43DE-A844-0DF3E0232D4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchTitleUpdater.Service", "src\TwitchTitleUpdater.Service\TwitchTitleUpdater.Service.csproj", "{02903B5F-59A8-4508-A60A-52B74B6BF29D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BapesBot.Service", "src\BapesBot.Service\BapesBot.Service.csproj", "{02903B5F-59A8-4508-A60A-52B74B6BF29D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
