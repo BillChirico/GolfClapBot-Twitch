@@ -331,3 +331,4 @@ ASALocalRun/
 
 # vscode files
 .vscode/
+/src/BapesBot.Console/appsettings.json
