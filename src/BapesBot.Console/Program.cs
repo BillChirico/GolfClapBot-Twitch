@@ -1,16 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using BapesBot.Service.CommandManager;
 using BapesBot.Service.Commands;
 using BapesBot.Service.Settings;
 using BapesBot.Service.TwitchBot;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TwitchLib.Client;
 using TwitchLib.Client.Interfaces;
-using Microsoft.Extensions.Configuration;
 
 namespace BapesBot.Console
 {
@@ -21,7 +23,7 @@ namespace BapesBot.Console
             var serviceCollection = ConfigureServiceCollection(new ServiceCollection());
             var twitchBot = serviceCollection.GetRequiredService<ITwitchBot>();
             var twitchSettings = serviceCollection.GetRequiredService<ISettingsService>().GeTwitchSettings();
-
+            
             await twitchBot.Connect(twitchSettings.Username, twitchSettings.AccessToken);
 
             await Task.Delay(Timeout.Infinite);
@@ -37,12 +39,11 @@ namespace BapesBot.Console
             var configuration = builder.Build();
 
             return serviceCollection
-
                 // Command Manager
                 .AddSingleton<ICommandManager, CommandManager>()
 
                 // Commands
-                .AddSingleton<ICommand, HelpCommand>()
+                .RegisterAllTypes<ICommand>(new[] {typeof(ICommand).Assembly}, ServiceLifetime.Singleton)
                 .AddSingleton<IList<ICommand>>(s => s.GetServices<ICommand>().ToList())
 
                 // Twitch
@@ -52,8 +53,28 @@ namespace BapesBot.Console
                 // Settings
                 .AddSingleton(configuration)
                 .AddSingleton<ISettingsService, SettingsService>()
-
                 .BuildServiceProvider();
+        }
+    }
+
+    public static class ServiceCollectionExtensions
+    {
+        /// <summary>
+        ///     Register all types that are subclass of the type specified.
+        /// </summary>
+        /// <param name="services">Collection to add to.</param>
+        /// <param name="assemblies">Assemblies to parse.</param>
+        /// <param name="lifetime">Lifetime of the service.</param>
+        /// <typeparam name="T">Base type of subclasses to register.</typeparam>
+        public static IServiceCollection RegisterAllTypes<T>(this IServiceCollection services, IEnumerable<Assembly> assemblies,
+            ServiceLifetime lifetime = ServiceLifetime.Transient)
+        {
+            var typesFromAssemblies =
+                assemblies.SelectMany(a => a.DefinedTypes.Where(x => x.GetTypeInfo().IsSubclassOf(typeof(T))));
+            foreach (var type in typesFromAssemblies)
+                services.Add(new ServiceDescriptor(typeof(T), type, lifetime));
+
+            return services;
         }
     }
 }
