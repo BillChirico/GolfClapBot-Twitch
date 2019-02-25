@@ -43,6 +43,9 @@ namespace BapesBot.Console
 
                 // Commands
                 .AddSingleton<ICommand, HelpCommand>()
+                .AddSingleton<ICommand, StatusCommand>()
+                .AddSingleton<ICommand, AddWinCommand>()
+                .AddSingleton<ICommand, RemoveWinCommand>()
                 .AddSingleton<IList<ICommand>>(s => s.GetServices<ICommand>().ToList())
 
                 // Twitch
