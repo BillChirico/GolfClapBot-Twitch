@@ -8,7 +8,7 @@ namespace BapesBot.Service.Commands
     {
         private readonly ITwitchClient _twitchClient;
 
-        public RemoveWinCommand(ITwitchClient twitchClient) : base("rmwin")
+        public RemoveWinCommand(ITwitchClient twitchClient) : base("removewin")
         {
             _twitchClient = twitchClient;
         }

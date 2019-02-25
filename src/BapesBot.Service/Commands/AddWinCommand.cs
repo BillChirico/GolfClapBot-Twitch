@@ -21,7 +21,7 @@ namespace BapesBot.Service.Commands
         public override Task<bool> Invoke(OnMessageReceivedArgs message)
         {
             Wins += 1;
-            _twitchClient.SendMessage(message.ChatMessage.Channel, $"Win Added. Current Wins:{Wins}");
+            _twitchClient.SendMessage(message.ChatMessage.Channel, $"Win Added. Current Wins: {Wins}");
 
             return Task.FromResult(true);
         }
