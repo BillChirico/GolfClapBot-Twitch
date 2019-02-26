@@ -50,7 +50,7 @@ namespace BapesBot.Console
                 .AddSingleton<ITwitchClient, TwitchClient>()
                 .AddSingleton<ITwitchBot, TwitchBot>()
 
-                //Counter
+                // Counter
                 .AddSingleton<ICounterService,CounterService>()
 
                 // Settings
