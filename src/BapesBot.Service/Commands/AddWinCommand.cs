@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using BapesBot.Service.Counter;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
 
@@ -9,26 +9,20 @@ namespace BapesBot.Service.Commands
     public class AddWinCommand : ICommand
     {
         private readonly ITwitchClient _twitchClient;
+        private readonly ICounterService _counterService;
 
-        public AddWinCommand(ITwitchClient twitchClient) : base("addwin")
+        public AddWinCommand(ITwitchClient twitchClient, ICounterService counterService) : base("addwin")
         {
             _twitchClient = twitchClient;
+            _counterService = counterService;
         }
-
-        public static int Wins { get; set; }
-
 
         public override Task<bool> Invoke(OnMessageReceivedArgs message)
         {
-            Wins += 1;
-            _twitchClient.SendMessage(message.ChatMessage.Channel, $"Win Added. Current Wins: {Wins}");
-
+            _counterService.AddCount();
+            _twitchClient.SendMessage(message.ChatMessage.Channel, $"Win Added. Current Wins: {_counterService.GetCount().Counter}");
+            
             return Task.FromResult(true);
-        }
-
-        public static implicit operator int(AddWinCommand v)
-        {
-            throw new NotImplementedException();
         }
     }
 }
