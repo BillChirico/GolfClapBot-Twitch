@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using BapesBot.Service.Counter;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
 
@@ -7,24 +8,26 @@ namespace BapesBot.Service.Commands
     public class RemoveWinCommand : ICommand
     {
         private readonly ITwitchClient _twitchClient;
+        private readonly ICounterService _counterService;
 
-        public RemoveWinCommand(ITwitchClient twitchClient) : base("removewin")
+        public RemoveWinCommand(ITwitchClient twitchClient, ICounterService counterService) : base("removewin")
         {
             _twitchClient = twitchClient;
+            _counterService = counterService;
         }
 
         public override Task<bool> Invoke(OnMessageReceivedArgs message)
         {
 
-            if (AddWinCommand.Wins <= 0)
+            if (_counterService.GetCount().Counter <= 0)
             {
                 _twitchClient.SendMessage(message.ChatMessage.Channel, $"No wins to remove");
             }
 
             else
             {
-                AddWinCommand.Wins -= 1;
-                _twitchClient.SendMessage(message.ChatMessage.Channel, $"Win Removed. Wins now: {AddWinCommand.Wins}");
+                _counterService.RemoveCount();
+                _twitchClient.SendMessage(message.ChatMessage.Channel, $"Win Removed. Wins now: {_counterService.GetCount().Counter}");
             }
 
             return Task.FromResult(true);
