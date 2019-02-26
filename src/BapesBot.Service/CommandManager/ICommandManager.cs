@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using TwitchLib.Client.Events;
+﻿using TwitchLib.Client.Events;
 
 namespace BapesBot.Service.CommandManager
 {
