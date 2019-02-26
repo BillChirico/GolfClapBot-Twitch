@@ -4,6 +4,9 @@ using TwitchLib.Client.Interfaces;
 
 namespace BapesBot.Service.Commands
 {
+    /// <summary>
+    /// Sends a message if the bot is running.
+    /// </summary>
     public class StatusCommand : ICommand
     {
         private readonly ITwitchClient _twitchClient;

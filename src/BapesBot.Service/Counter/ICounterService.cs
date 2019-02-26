@@ -2,6 +2,9 @@
 
 namespace BapesBot.Service.Counter
 {
+    /// <summary>
+    /// Interface for the CounterService
+    /// </summary>
     public interface ICounterService
     {
         CounterInfo AddCount();

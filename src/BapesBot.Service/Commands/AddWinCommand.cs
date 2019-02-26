@@ -6,6 +6,9 @@ using TwitchLib.Client.Interfaces;
 
 namespace BapesBot.Service.Commands
 {
+    /// <summary>
+    /// Adds 1 to a Counter. Displays the Wins after addition. 
+    /// </summary>
     public class AddWinCommand : ICommand
     {
         private readonly ITwitchClient _twitchClient;

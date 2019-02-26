@@ -4,7 +4,10 @@ using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
 
 namespace BapesBot.Service.Commands
-{
+{ 
+    /// <summary>
+    /// Removes 1 from a Counter. Displays the Wins after removal. If counter is 0 gives an error.
+    /// </summary>
     public class RemoveWinCommand : ICommand
     {
         private readonly ITwitchClient _twitchClient;
