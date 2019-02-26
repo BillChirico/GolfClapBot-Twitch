@@ -2,6 +2,9 @@
 
 namespace BapesBot.Service.Counter
 {
+    /// <summary>
+    /// Service to keep track of a counter. Add, Remove, and Get.
+    /// </summary>
     public class CounterService : ICounterService
     {
         private readonly CounterInfo _counterInfo;
