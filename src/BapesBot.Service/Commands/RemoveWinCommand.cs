@@ -21,7 +21,6 @@ namespace BapesBot.Service.Commands
 
         public override Task<bool> Invoke(OnMessageReceivedArgs message)
         {
-
             if (_counterService.GetCount().Counter <= 0)
             {
                 _twitchClient.SendMessage(message.ChatMessage.Channel, $"No wins to remove");
