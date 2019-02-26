@@ -9,6 +9,7 @@ using BapesBot.Service.CommandManager;
 using BapesBot.Service.Commands;
 using BapesBot.Service.Settings;
 using BapesBot.Service.TwitchBot;
+using BapesBot.Service.Counter;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TwitchLib.Client;
@@ -49,6 +50,9 @@ namespace BapesBot.Console
                 // Twitch
                 .AddSingleton<ITwitchClient, TwitchClient>()
                 .AddSingleton<ITwitchBot, TwitchBot>()
+
+                //Counter
+                .AddSingleton<ICounterService,CounterService>()
 
                 // Settings
                 .AddSingleton(configuration)
