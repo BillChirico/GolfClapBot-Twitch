@@ -1,17 +1,14 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using TwitchLib.Client.Events;
 
 namespace BapesBot.Service.Commands
 {
-    public abstract class ICommand
+    public interface ICommand
     {
-        protected ICommand(string commandText)
-        {
-            CommandText = commandText;
-        }
-
-        public abstract Task<bool> Invoke(OnMessageReceivedArgs message);
-
-        public string CommandText { get; set; }
+        /// <summary>
+        ///     Invoke the command.
+        /// </summary>
+        /// <param name="message">Message received.</param>
+        Task<bool> Invoke(OnMessageReceivedArgs message);
     }
 }

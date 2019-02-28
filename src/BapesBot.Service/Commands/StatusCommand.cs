@@ -7,7 +7,7 @@ namespace BapesBot.Service.Commands
     /// <summary>
     /// Sends a message if the bot is running.
     /// </summary>
-    public class StatusCommand : ICommand
+    public class StatusCommand : Command
     {
         private readonly ITwitchClient _twitchClient;
 
@@ -24,4 +24,3 @@ namespace BapesBot.Service.Commands
         }
     }
 }
-

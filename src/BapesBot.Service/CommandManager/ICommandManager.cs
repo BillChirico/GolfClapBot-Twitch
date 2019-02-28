@@ -1,9 +1,10 @@
-﻿using TwitchLib.Client.Events;
+﻿using System.Threading.Tasks;
+using TwitchLib.Client.Events;
 
 namespace BapesBot.Service.CommandManager
 {
     public interface ICommandManager
     {
-        void MessageReceived(object sender, OnMessageReceivedArgs message);
+        Task MessageReceived(object sender, OnMessageReceivedArgs message);
     }
 }

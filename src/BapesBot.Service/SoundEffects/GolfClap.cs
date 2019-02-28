@@ -1,8 +1,11 @@
 ﻿namespace BapesBot.Service.SoundEffects
 {
-    public class GolfClap : ISoundEffect
+    /// <summary>
+    ///     Play the golf clap sound effect.
+    /// </summary>
+    public class GolfClap : SoundEffect
     {
-        public GolfClap(string soundEffect) : base(soundEffect)
+        public GolfClap() : base("thebapGolfclap", "file")
         {
         }
     }
