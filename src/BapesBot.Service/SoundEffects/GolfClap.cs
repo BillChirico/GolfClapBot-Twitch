@@ -5,7 +5,7 @@
     /// </summary>
     public class GolfClap : SoundEffect
     {
-        public GolfClap() : base("thebapGolfclap", "file")
+        public GolfClap() : base("thebapGolfclap", "./SoundFiles/GolfClap.wav")
         {
         }
     }

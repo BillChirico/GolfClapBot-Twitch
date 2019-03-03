@@ -41,7 +41,7 @@ namespace BapesBot.Service.TwitchBot
 
         private void OnLog(object sender, OnLogArgs e)
         {
-            Console.WriteLine($"{e.DateTime.ToString(CultureInfo.InvariantCulture)}: {e.BotUsername} - {e.Data}");
+            Console.WriteLine($"{e.DateTime.ToString(CultureInfo.InvariantCulture)}: {e.Data}");
         }
     }
 }
