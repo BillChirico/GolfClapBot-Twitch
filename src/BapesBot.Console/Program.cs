@@ -6,9 +6,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using BapesBot.Service.CommandManager;
 using BapesBot.Service.Commands;
-using BapesBot.Service.Settings;
-using BapesBot.Service.TwitchBot;
 using BapesBot.Service.Counter;
+using BapesBot.Service.Settings;
+using BapesBot.Service.SoundEffectManager;
+using BapesBot.Service.SoundEffects;
+using BapesBot.Service.TwitchBot;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TwitchLib.Client;
@@ -23,7 +25,7 @@ namespace BapesBot.Console
             var serviceCollection = ConfigureServiceCollection(new ServiceCollection());
             var twitchBot = serviceCollection.GetRequiredService<ITwitchBot>();
             var twitchSettings = serviceCollection.GetRequiredService<ISettingsService>().GeTwitchSettings();
-            
+
             await twitchBot.Connect(twitchSettings.Username, twitchSettings.AccessToken);
 
             await Task.Delay(Timeout.Infinite);
@@ -43,15 +45,22 @@ namespace BapesBot.Console
                 .AddSingleton<ICommandManager, CommandManager>()
 
                 // Commands
-                .RegisterAllTypes<ICommand>(new[] {typeof(ICommand).Assembly}, ServiceLifetime.Singleton)
-                .AddSingleton<IList<ICommand>>(s => s.GetServices<ICommand>().ToList())
+                .RegisterAllTypes<Command>(new[] {typeof(Command).Assembly}, ServiceLifetime.Singleton)
+                .AddSingleton<IList<Command>>(s => s.GetServices<Command>().ToList())
+
+                // Sound Effects Manager
+                .AddSingleton<SoundEffectManager>()
+
+                // Sound Effects
+                .RegisterAllTypes<SoundEffect>(new[] {typeof(SoundEffect).Assembly}, ServiceLifetime.Singleton)
+                .AddSingleton<IList<SoundEffect>>(s => s.GetServices<SoundEffect>().ToList())
 
                 // Twitch
                 .AddSingleton<ITwitchClient, TwitchClient>()
                 .AddSingleton<ITwitchBot, TwitchBot>()
 
                 // Counter
-                .AddSingleton<ICounterService,CounterService>()
+                .AddSingleton<ICounterService, CounterService>()
 
                 // Settings
                 .AddSingleton(configuration)
@@ -69,7 +78,8 @@ namespace BapesBot.Console
         /// <param name="assemblies">Assemblies to parse.</param>
         /// <param name="lifetime">Lifetime of the service.</param>
         /// <typeparam name="T">Base type of subclasses to register.</typeparam>
-        public static IServiceCollection RegisterAllTypes<T>(this IServiceCollection services, IEnumerable<Assembly> assemblies,
+        public static IServiceCollection RegisterAllTypes<T>(this IServiceCollection services,
+            IEnumerable<Assembly> assemblies,
             ServiceLifetime lifetime = ServiceLifetime.Transient)
         {
             var typesFromAssemblies =

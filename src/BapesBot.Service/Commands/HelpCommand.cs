@@ -4,7 +4,7 @@ using TwitchLib.Client.Interfaces;
 
 namespace BapesBot.Service.Commands
 {
-    public class HelpCommand : ICommand
+    public class HelpCommand : Command
     {
         private readonly ITwitchClient _twitchClient;
 
