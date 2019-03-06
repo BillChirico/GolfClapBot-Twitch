@@ -11,11 +11,8 @@ namespace BapesBot.Service.Commands
             CommandText = commandText;
         }
 
-        //public List<string> CommandText { get; }
         public List<string> CommandText { get; }
 
         public abstract Task<bool> Invoke(OnMessageReceivedArgs message);
-
-        //public string CommandText { get; }
     }
 }
