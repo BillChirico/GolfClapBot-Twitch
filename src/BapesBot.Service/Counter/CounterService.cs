@@ -2,8 +2,9 @@
 
 namespace BapesBot.Service.Counter
 {
+    /// <inheritdoc />
     /// <summary>
-    /// Service to keep track of a counter. Add, Remove, and Get.
+    ///     Service to keep track of a counter. Add, Remove, and Get.
     /// </summary>
     public class CounterService : ICounterService
     {
@@ -15,18 +16,18 @@ namespace BapesBot.Service.Counter
         }
 
         /// <summary>
-        /// Adds 1 to the Counter
+        ///     Adds 1 to the Counter
         /// </summary>
         /// <returns>CounterInfo</returns>
         public CounterInfo AddCount()
         {
-           _counterInfo.Counter += 1;
+            _counterInfo.Counter += 1;
 
             return _counterInfo;
         }
 
         /// <summary>
-        /// Removes 1 from the Counter
+        ///     Removes 1 from the Counter
         /// </summary>
         /// <returns>CounterInfo</returns>
         public CounterInfo RemoveCount()
@@ -37,7 +38,7 @@ namespace BapesBot.Service.Counter
         }
 
         /// <summary>
-        /// Returns the CounterInfo object
+        ///     Returns the CounterInfo object
         /// </summary>
         /// <returns>CounterInfo</returns>
         public CounterInfo GetCount()
