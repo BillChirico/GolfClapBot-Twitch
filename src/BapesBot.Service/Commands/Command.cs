@@ -6,12 +6,12 @@ namespace BapesBot.Service.Commands
 {
     public abstract class Command : ICommand
     {
-        protected Command(List<string> commandText)
+        protected Command(List<string> commands)
         {
-            CommandText = commandText;
+            Commands = commands;
         }
 
-        public List<string> CommandText { get; }
+        public List<string> Commands { get; }
 
         public abstract Task<bool> Invoke(OnMessageReceivedArgs message);
     }
