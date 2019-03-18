@@ -1,17 +1,19 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
 
 namespace BapesBot.Service.Commands
 {
     /// <summary>
-    /// Sends a message if the bot is running.
+    ///     Sends a message if the bot is running.
     /// </summary>
     public class StatusCommand : Command
     {
         private readonly ITwitchClient _twitchClient;
 
-        public StatusCommand(ITwitchClient twitchClient) : base("status")
+        public StatusCommand(ITwitchClient twitchClient) : base(new List<string> {"status", "st"})
+
         {
             _twitchClient = twitchClient;
         }

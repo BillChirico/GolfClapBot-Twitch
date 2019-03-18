@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using BapesBot.Service.Commands;
 using TwitchLib.Client.Events;
@@ -7,13 +8,14 @@ namespace BapesBot.Service.SoundEffects
 {
     public class SoundEffect : ICommand
     {
-        protected SoundEffect(string command, string file)
+        protected SoundEffect(List<string> soundEffectTriggers, string file)
         {
-            Command = command;
+            SoundEffectTriggers = soundEffectTriggers;
             File = file;
         }
 
-        public string Command { get; }
+        public List<string> SoundEffectTriggers { get; }
+
         private string File { get; }
 
         /// <summary>

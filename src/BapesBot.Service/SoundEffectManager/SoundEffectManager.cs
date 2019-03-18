@@ -19,12 +19,10 @@ namespace BapesBot.Service.SoundEffectManager
         public async Task MessageReceived(object sender, OnMessageReceivedArgs message)
         {
             // List of commands that match the message
-            var invokedSoundEffects = _soundEffects.Where(s => message.ChatMessage.Message.Contains(s.Command));
+            var invokedSoundEffects =
+                _soundEffects.Where(s => s.SoundEffectTriggers.Any(ct => message.ChatMessage.Message.Contains(ct)));
 
-            foreach (var soundEffect in invokedSoundEffects)
-            {
-                await soundEffect.Invoke(message);
-            }
+            foreach (var soundEffect in invokedSoundEffects) await soundEffect.Invoke(message);
         }
     }
 }

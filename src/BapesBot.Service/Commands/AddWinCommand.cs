@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using BapesBot.Service.Counter;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
@@ -13,7 +14,8 @@ namespace BapesBot.Service.Commands
         private readonly ICounterService _counterService;
         private readonly ITwitchClient _twitchClient;
 
-        public AddWinCommand(ITwitchClient twitchClient, ICounterService counterService) : base("addwin")
+        public AddWinCommand(ITwitchClient twitchClient, ICounterService counterService) : base(new List<string>
+            {"addwin", "aw"})
         {
             _twitchClient = twitchClient;
             _counterService = counterService;

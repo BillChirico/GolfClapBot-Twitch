@@ -20,13 +20,10 @@ namespace BapesBot.Service.CommandManager
         {
             // List of commands that match the message
             var invokedCommands = _commands.Where(c =>
-                string.Equals($"${c.CommandText}", message.ChatMessage.Message,
-                    StringComparison.InvariantCultureIgnoreCase));
+                c.CommandTriggers.Any(ct => string.Equals($"${ct}", message.ChatMessage.Message,
+                    StringComparison.InvariantCultureIgnoreCase)));
 
-            foreach (var command in invokedCommands)
-            {
-                await command.Invoke(message);
-            }
+            foreach (var command in invokedCommands) await command.Invoke(message);
         }
     }
 }

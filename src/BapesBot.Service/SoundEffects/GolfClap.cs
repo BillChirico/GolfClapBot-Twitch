@@ -1,11 +1,14 @@
-﻿namespace BapesBot.Service.SoundEffects
+﻿using System.Collections.Generic;
+
+namespace BapesBot.Service.SoundEffects
 {
     /// <summary>
     ///     Play the golf clap sound effect.
     /// </summary>
     public class GolfClap : SoundEffect
     {
-        public GolfClap() : base("thebapGolfclap", "./SoundFiles/GolfClap.wav")
+        public GolfClap() : base(new List<string> {"thebapGolfclap", "!golfclap", "golfclap"},
+            "./SoundFiles/GolfClap.wav")
         {
         }
     }

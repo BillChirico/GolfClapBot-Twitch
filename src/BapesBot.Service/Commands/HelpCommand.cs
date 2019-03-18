@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
 
@@ -8,7 +9,8 @@ namespace BapesBot.Service.Commands
     {
         private readonly ITwitchClient _twitchClient;
 
-        public HelpCommand(ITwitchClient twitchClient) : base("help")
+        public HelpCommand(ITwitchClient twitchClient) : base(new List<string> {"help", "hp"})
+
         {
             _twitchClient = twitchClient;
         }
