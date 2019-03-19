@@ -7,7 +7,7 @@ using TwitchLib.Client.Interfaces;
 namespace BapesBot.Service.Commands
 {
     /// <summary>
-    ///     Removes 1 from a Counter. Displays the Wins after removal. If counter is 0 gives an error.
+    ///     Removes one to the wins counter. Displays the Wins after removal. If counter is zero gives an error.
     /// </summary>
     public class RemoveWinCommand : Command
     {
@@ -23,16 +23,18 @@ namespace BapesBot.Service.Commands
 
         public override Task<bool> Invoke(OnMessageReceivedArgs message)
         {
-            if (_counterService.GetCount().Counter <= 0)
+            var counter = _counterService.GetCounter("Wins");
+
+            if (counter.Count <= 0)
             {
-                _twitchClient.SendMessage(message.ChatMessage.Channel, "No wins to remove");
+                _twitchClient.SendMessage(message.ChatMessage.Channel, "No wins to remove.");
             }
 
             else
             {
-                _counterService.RemoveCount();
+                _counterService.RemoveCount(counter);
                 _twitchClient.SendMessage(message.ChatMessage.Channel,
-                    $"Win Removed. Wins now: {_counterService.GetCount().Counter}");
+                    $"Win Removed. Wins now: {counter.Count}");
             }
 
             return Task.FromResult(true);

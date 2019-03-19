@@ -5,6 +5,8 @@
     /// </summary>
     public class CounterInfo
     {
-        public int Counter { get; set; }
+        public string Name { get; set; }
+
+        public int Count { get; set; }
     }
 }

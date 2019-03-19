@@ -7,7 +7,7 @@ using TwitchLib.Client.Interfaces;
 namespace BapesBot.Service.Commands
 {
     /// <summary>
-    ///     Adds 1 to a Counter. Displays the Wins after addition.
+    ///     Adds one to the wins count. Displays the Wins after addition.
     /// </summary>
     public class AddWinCommand : Command
     {
@@ -19,13 +19,17 @@ namespace BapesBot.Service.Commands
         {
             _twitchClient = twitchClient;
             _counterService = counterService;
+            _counterService.AddCounter("Wins");
         }
 
         public override Task<bool> Invoke(OnMessageReceivedArgs message)
         {
-            _counterService.AddCount();
+            var counter = _counterService.GetCounter("Wins");
+
+            _counterService.AddCount(counter);
+
             _twitchClient.SendMessage(message.ChatMessage.Channel,
-                $"Win Added. Current Wins: {_counterService.GetCount().Counter}");
+                $"Win Added. Current Wins: {counter.Count}");
 
             return Task.FromResult(true);
         }

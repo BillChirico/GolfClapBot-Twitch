@@ -1,4 +1,5 @@
-﻿using BapesBot.Domain.Counter;
+﻿using System.Collections.Generic;
+using BapesBot.Domain.Counter;
 
 namespace BapesBot.Service.Counter
 {
@@ -8,42 +9,41 @@ namespace BapesBot.Service.Counter
     /// </summary>
     public class CounterService : ICounterService
     {
-        private readonly CounterInfo _counterInfo;
+        private readonly Dictionary<string, CounterInfo> _counterInfo;
 
         public CounterService()
         {
-            _counterInfo = new CounterInfo();
+            _counterInfo = new Dictionary<string, CounterInfo>();
         }
 
-        /// <summary>
-        ///     Adds 1 to the Counter
-        /// </summary>
-        /// <returns>CounterInfo</returns>
-        public CounterInfo AddCount()
+        /// <inheritdoc />
+        public CounterInfo AddCount(CounterInfo counter)
         {
-            _counterInfo.Counter += 1;
+            counter.Count += 1;
 
-            return _counterInfo;
+            return counter;
         }
 
-        /// <summary>
-        ///     Removes 1 from the Counter
-        /// </summary>
-        /// <returns>CounterInfo</returns>
-        public CounterInfo RemoveCount()
+        /// <inheritdoc />
+        public CounterInfo RemoveCount(CounterInfo counter)
         {
-            _counterInfo.Counter -= 1;
+            counter.Count -= 1;
 
-            return _counterInfo;
+            return counter;
         }
 
-        /// <summary>
-        ///     Returns the CounterInfo object
-        /// </summary>
-        /// <returns>CounterInfo</returns>
-        public CounterInfo GetCount()
+        /// <inheritdoc />
+        public CounterInfo GetCounter(string key)
         {
-            return _counterInfo;
+            return _counterInfo[key];
+        }
+
+        /// <inheritdoc />
+        public CounterInfo AddCounter(string key)
+        {
+            var counter = new CounterInfo {Name = key};
+
+            return !_counterInfo.TryAdd(key, counter) ? _counterInfo[key] : counter;
         }
     }
 }

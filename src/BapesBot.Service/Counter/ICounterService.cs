@@ -3,26 +3,36 @@
 namespace BapesBot.Service.Counter
 {
     /// <summary>
-    /// Interface for the CounterService
+    ///     Interface for the CounterService
     /// </summary>
     public interface ICounterService
     {
         /// <summary>
-        /// Add 1 to a Counter.
+        ///     Add one to a Counter.
         /// </summary>
-        /// <returns></returns>
-        CounterInfo AddCount();
+        /// <param name="counter">Counter to add one to.</param>
+        /// <returns>Updater counter.</returns>
+        CounterInfo AddCount(CounterInfo counter);
 
         /// <summary>
-        /// Removes 1 from a Counter.
+        ///     Removes one from a Counter.
         /// </summary>
-        /// <returns></returns>
-        CounterInfo RemoveCount();
+        /// <param name="counter">Counter to remove one from.</param>
+        /// <returns>Updated counter.</returns>
+        CounterInfo RemoveCount(CounterInfo counter);
 
         /// <summary>
-        /// Returns the CounterService object.
+        ///     Get counter based on key.
         /// </summary>
-        /// <returns></returns>
-        CounterInfo GetCount();
+        /// <param name="key">Key of counter.</param>
+        /// <returns>Counter info.</returns>
+        CounterInfo GetCounter(string key);
+
+        /// <summary>
+        ///     Get a new counter
+        /// </summary>
+        /// <param name="key">Key of counter.</param>
+        /// <returns>Counter info.</returns>
+        CounterInfo AddCounter(string key);
     }
 }
