@@ -18,9 +18,13 @@ namespace BapesBot.Service.CommandManager
 
         public async Task MessageReceived(object sender, OnMessageReceivedArgs message)
         {
+            // Don't check for commands if the message doesn't start with a prefix
+            if (!(message.ChatMessage.Message.StartsWith("$") || message.ChatMessage.Message.StartsWith("!"))) return;
+
             // List of commands that match the message
             var invokedCommands = _commands.Where(c =>
-                c.CommandTriggers.Any(ct => string.Equals($"${ct}", message.ChatMessage.Message,
+                c.CommandTriggers.Any(ct => string.Equals(ct,
+                    message.ChatMessage.Message.Substring(1),
                     StringComparison.InvariantCultureIgnoreCase)));
 
             foreach (var command in invokedCommands) await command.Invoke(message);
