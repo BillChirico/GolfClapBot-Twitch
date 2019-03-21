@@ -13,6 +13,6 @@ namespace BapesBot.Service.Commands
 
         public List<string> CommandTriggers { get; }
 
-        public abstract Task<bool> Invoke(OnMessageReceivedArgs message);
+        public abstract Task<bool> Invoke(OnMessageReceivedArgs message, List<string> args);
     }
 }

@@ -15,7 +15,7 @@ namespace BapesBot.Service.Commands
             _twitchClient = twitchClient;
         }
 
-        public override Task<bool> Invoke(OnMessageReceivedArgs message)
+        public override Task<bool> Invoke(OnMessageReceivedArgs message, List<string> args)
         {
             _twitchClient.SendMessage(message.ChatMessage.Channel, "You don't need any help yet lol");
 

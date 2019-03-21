@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BapesBot.Service.Arguments;
 using BapesBot.Service.Commands;
 using TwitchLib.Client.Events;
 
@@ -21,13 +22,21 @@ namespace BapesBot.Service.CommandManager
             // Don't check for commands if the message doesn't start with a prefix
             if (!(message.ChatMessage.Message.StartsWith("$") || message.ChatMessage.Message.StartsWith("!"))) return;
 
+            var args = ArgumentParser.GetArguments(message.ChatMessage.Message);
+
+            var command = message.ChatMessage.Message.Substring(1);
+
+            // Remove arguments
+            if (message.ChatMessage.Message.Contains(' '))
+                command = command.Remove(command.IndexOf(' '));
+
             // List of commands that match the message
             var invokedCommands = _commands.Where(c =>
                 c.CommandTriggers.Any(ct => string.Equals(ct,
-                    message.ChatMessage.Message.Substring(1),
+                    command,
                     StringComparison.InvariantCultureIgnoreCase)));
 
-            foreach (var command in invokedCommands) await command.Invoke(message);
+            foreach (var invokedCommand in invokedCommands) await invokedCommand.Invoke(message, args);
         }
     }
 }

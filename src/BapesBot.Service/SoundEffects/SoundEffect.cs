@@ -22,7 +22,7 @@ namespace BapesBot.Service.SoundEffects
         ///     Play sound effect.
         /// </summary>
         /// <param name="message">Message received.</param>
-        public Task<bool> Invoke(OnMessageReceivedArgs message)
+        public Task<bool> Invoke(OnMessageReceivedArgs message, List<string> args = null)
         {
             try
             {

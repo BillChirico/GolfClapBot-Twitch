@@ -21,7 +21,7 @@ namespace BapesBot.Service.Commands
             _counterService = counterService;
         }
 
-        public override Task<bool> Invoke(OnMessageReceivedArgs message)
+        public override Task<bool> Invoke(OnMessageReceivedArgs message, List<string> args)
         {
             var counter = _counterService.GetCounter("Wins");
 
