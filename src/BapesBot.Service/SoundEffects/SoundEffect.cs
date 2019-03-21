@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using BapesBot.Service.Commands;
-using TwitchLib.Client.Events;
+using TwitchLib.Client.Models;
 
 namespace BapesBot.Service.SoundEffects
 {
@@ -22,7 +22,7 @@ namespace BapesBot.Service.SoundEffects
         ///     Play sound effect.
         /// </summary>
         /// <param name="message">Message received.</param>
-        public Task<bool> Invoke(OnMessageReceivedArgs message, List<string> args = null)
+        public Task<bool> Invoke(ChatMessage message)
         {
             try
             {

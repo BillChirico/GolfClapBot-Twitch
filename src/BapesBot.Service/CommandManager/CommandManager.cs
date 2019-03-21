@@ -34,9 +34,21 @@ namespace BapesBot.Service.CommandManager
             var invokedCommands = _commands.Where(c =>
                 c.CommandTriggers.Any(ct => string.Equals(ct,
                     command,
-                    StringComparison.InvariantCultureIgnoreCase)));
+                    StringComparison.InvariantCultureIgnoreCase)) && (c.GetType().GetMethod("SetArguments") == null ||
+                                                                      c.GetType().GetMethod("SetArguments")
+                                                                          .GetParameters()
+                                                                          .Length == args.Length));
 
-            foreach (var invokedCommand in invokedCommands) await invokedCommand.Invoke(message, args);
+            foreach (var invokedCommand in invokedCommands)
+            {
+                var setArgumentsMethod = invokedCommand.GetType().GetMethod("SetArguments");
+
+                // Set arguments
+                if (setArgumentsMethod != null)
+                    setArgumentsMethod.Invoke(invokedCommand, args);
+
+                await invokedCommand.Invoke(message.ChatMessage);
+            }
         }
     }
 }

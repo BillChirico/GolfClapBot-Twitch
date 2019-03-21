@@ -53,14 +53,14 @@ namespace BapesBot.Console
                 .AddSingleton<ICommandManager, CommandManager>()
 
                 // Commands
-                .RegisterAllTypes<Command>(new[] {typeof(Command).Assembly}, ServiceLifetime.Singleton)
+                .RegisterAllTypes<Command>(new[] {typeof(Command).Assembly}, ServiceLifetime.Scoped)
                 .AddSingleton<IList<Command>>(s => s.GetServices<Command>().ToList())
 
                 // Sound Effects Manager
                 .AddSingleton<SoundEffectManager>()
 
                 // Sound Effects
-                .RegisterAllTypes<SoundEffect>(new[] {typeof(SoundEffect).Assembly}, ServiceLifetime.Singleton)
+                .RegisterAllTypes<SoundEffect>(new[] {typeof(SoundEffect).Assembly}, ServiceLifetime.Scoped)
                 .AddSingleton<IList<SoundEffect>>(s => s.GetServices<SoundEffect>().ToList())
 
                 // Twitch

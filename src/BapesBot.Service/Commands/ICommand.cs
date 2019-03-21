@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TwitchLib.Client.Events;
+using TwitchLib.Client.Models;
 
 namespace BapesBot.Service.Commands
 {
@@ -10,7 +11,6 @@ namespace BapesBot.Service.Commands
         ///     Invoke the command.
         /// </summary>
         /// <param name="message">Message received.</param>
-        /// <param name="args">Arguments from the message.</param>
-        Task<bool> Invoke(OnMessageReceivedArgs message, List<string> args);
+        Task<bool> Invoke(ChatMessage message);
     }
 }

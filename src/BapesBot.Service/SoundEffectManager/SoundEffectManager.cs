@@ -22,7 +22,7 @@ namespace BapesBot.Service.SoundEffectManager
             var invokedSoundEffects =
                 _soundEffects.Where(s => s.SoundEffectTriggers.Any(ct => message.ChatMessage.Message.Contains(ct)));
 
-            foreach (var soundEffect in invokedSoundEffects) await soundEffect.Invoke(message);
+            foreach (var soundEffect in invokedSoundEffects) await soundEffect.Invoke(message.ChatMessage);
         }
     }
 }
