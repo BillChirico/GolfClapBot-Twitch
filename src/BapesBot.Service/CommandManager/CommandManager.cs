@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BapesBot.Service.Arguments;
 using BapesBot.Service.Commands;
+using BapesBot.Service.MessageHelpers;
 using TwitchLib.Client.Events;
 
 namespace BapesBot.Service.CommandManager
@@ -22,7 +22,7 @@ namespace BapesBot.Service.CommandManager
             // Don't check for commands if the message doesn't start with a prefix
             if (!(message.ChatMessage.Message.StartsWith("$") || message.ChatMessage.Message.StartsWith("!"))) return;
 
-            var args = ArgumentParser.GetArguments(message.ChatMessage.Message);
+            var args = MessageHelper.GetArguments(message.ChatMessage.Message);
 
             var command = message.ChatMessage.Message.Substring(1);
 
