@@ -26,7 +26,7 @@ namespace BapesBot.Service.Commands
             var counter = _counterService.GetCounter("Wins");
 
             _twitchClient.SendMessage(message.Channel,
-                $"Current Wins: {counter.Count}");
+                counter != null ? $"Current Wins: {counter.Count}" : "Current Wins: 0");
 
             return Task.FromResult(true);
         }
