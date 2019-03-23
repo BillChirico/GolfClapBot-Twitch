@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BapesBot.Service.Counter;
-using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
+using TwitchLib.Client.Models;
 
 namespace BapesBot.Service.Commands
 {
@@ -21,12 +21,12 @@ namespace BapesBot.Service.Commands
             _counterService = counterService;
         }
 
-        public override Task<bool> Invoke(OnMessageReceivedArgs message)
+        public override Task<bool> Invoke(ChatMessage message)
         {
             var counter = _counterService.GetCounter("Wins");
 
-            _twitchClient.SendMessage(message.ChatMessage.Channel,
-                $"Current Wins: {counter.Count}");
+            _twitchClient.SendMessage(message.Channel,
+                counter != null ? $"Current Wins: {counter.Count}" : "Current Wins: 0");
 
             return Task.FromResult(true);
         }

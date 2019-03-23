@@ -35,15 +35,16 @@ namespace BapesBot.Service.Counter
         /// <inheritdoc />
         public CounterInfo GetCounter(string key)
         {
-            return _counterInfo[key];
+            return _counterInfo.ContainsKey(key) ? _counterInfo[key] : null;
         }
 
         /// <inheritdoc />
         public CounterInfo AddCounter(string key)
         {
             var counter = new CounterInfo {Name = key};
+            _counterInfo.Add(key, counter);
 
-            return !_counterInfo.TryAdd(key, counter) ? _counterInfo[key] : counter;
+            return counter;
         }
     }
 }

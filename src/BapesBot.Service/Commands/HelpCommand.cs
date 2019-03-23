@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
+using TwitchLib.Client.Models;
 
 namespace BapesBot.Service.Commands
 {
@@ -15,9 +15,9 @@ namespace BapesBot.Service.Commands
             _twitchClient = twitchClient;
         }
 
-        public override Task<bool> Invoke(OnMessageReceivedArgs message)
+        public override Task<bool> Invoke(ChatMessage message)
         {
-            _twitchClient.SendMessage(message.ChatMessage.Channel, "You don't need any help yet lol");
+            _twitchClient.SendMessage(message.Channel, "You don't need any help yet lol");
 
             return Task.FromResult(true);
         }

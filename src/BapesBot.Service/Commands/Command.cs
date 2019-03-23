@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using TwitchLib.Client.Events;
+using TwitchLib.Client.Models;
 
 namespace BapesBot.Service.Commands
 {
@@ -13,6 +13,6 @@ namespace BapesBot.Service.Commands
 
         public List<string> CommandTriggers { get; }
 
-        public abstract Task<bool> Invoke(OnMessageReceivedArgs message);
+        public abstract Task<bool> Invoke(ChatMessage message);
     }
 }
