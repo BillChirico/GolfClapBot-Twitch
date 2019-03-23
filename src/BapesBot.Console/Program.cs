@@ -23,20 +23,13 @@ namespace BapesBot.Console
     {
         public static async Task Main(string[] args)
         {
-            try
-            {
-                var serviceCollection = ConfigureServiceCollection(new ServiceCollection());
-                var twitchBot = serviceCollection.GetRequiredService<ITwitchBot>();
-                var twitchSettings = serviceCollection.GetRequiredService<ISettingsService>().GeTwitchSettings();
+            var serviceCollection = ConfigureServiceCollection(new ServiceCollection());
+            var twitchBot = serviceCollection.GetRequiredService<ITwitchBot>();
+            var twitchSettings = serviceCollection.GetRequiredService<ISettingsService>().GeTwitchSettings();
 
-                await twitchBot.Connect(twitchSettings.Username, twitchSettings.AccessToken);
+            await twitchBot.Connect(twitchSettings.Username, twitchSettings.AccessToken);
 
-                await Task.Delay(Timeout.Infinite);
-            }
-            catch (Exception exception)
-            {
-                System.Console.WriteLine($"Error Occurred: {exception.Message}");
-            }
+            await Task.Delay(Timeout.Infinite);
         }
 
         private static ServiceProvider ConfigureServiceCollection(IServiceCollection serviceCollection)

@@ -10,11 +10,22 @@ namespace BapesBot.Service.CommandPersistence
     {
         public void Save(T value)
         {
-            using (var file =
-                File.CreateText(
-                    $"{Directory.GetCurrentDirectory()}/{value.Command.CommandTriggers.FirstOrDefault()}.json"))
+            try
             {
-                new JsonSerializer().Serialize(file, value);
+                var fileInfo =
+                    new FileInfo(
+                        $"{Directory.GetCurrentDirectory()}/Settings/{value.Command.CommandTriggers.FirstOrDefault()}.json");
+
+                fileInfo.Directory?.Create();
+
+                using (var file = fileInfo.CreateText())
+                {
+                    new JsonSerializer().Serialize(file, value);
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"Erroring while saving: {exception.Message}");
             }
         }
 
