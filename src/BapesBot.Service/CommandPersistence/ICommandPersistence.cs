@@ -7,6 +7,6 @@ namespace BapesBot.Service.CommandPersistence
     {
         void Save(T value);
 
-        T Get();
+        T Get(Command command);
     }
 }

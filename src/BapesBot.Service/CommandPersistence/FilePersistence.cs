@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using BapesBot.Service.Commands;
 using BapesBot.Service.Commands.Settings;
 using Newtonsoft.Json;
 
@@ -29,9 +30,13 @@ namespace BapesBot.Service.CommandPersistence
             }
         }
 
-        public T Get()
+        public T Get(Command command)
         {
-            throw new NotImplementedException();
+            var fileInfo =
+                new FileInfo(
+                    $"{Directory.GetCurrentDirectory()}/Settings/{command.CommandTriggers.FirstOrDefault()}.json");
+
+            return !fileInfo.Exists ? null : JsonConvert.DeserializeObject<T>(File.ReadAllText(fileInfo.FullName));
         }
     }
 }
