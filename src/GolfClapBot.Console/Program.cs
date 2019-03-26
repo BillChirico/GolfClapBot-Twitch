@@ -5,19 +5,19 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using BapesBot.Service.CommandManager;
-using BapesBot.Service.Commands;
-using BapesBot.Service.Counter;
-using BapesBot.Service.Settings;
-using BapesBot.Service.SoundEffectManager;
-using BapesBot.Service.SoundEffects;
-using BapesBot.Service.TwitchBot;
+using GolfClapBot.Service.CommandManager;
+using GolfClapBot.Service.Commands;
+using GolfClapBot.Service.Counter;
+using GolfClapBot.Service.Settings;
+using GolfClapBot.Service.SoundEffectManager;
+using GolfClapBot.Service.SoundEffects;
+using GolfClapBot.Service.TwitchBot;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TwitchLib.Client;
 using TwitchLib.Client.Interfaces;
 
-namespace BapesBot.Console
+namespace GolfClapBot.Console
 {
     internal class Program
     {

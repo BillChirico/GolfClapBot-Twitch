@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace BapesBot.Service.TwitchBot
+namespace GolfClapBot.Service.TwitchBot
 {
     public interface ITwitchBot
     {

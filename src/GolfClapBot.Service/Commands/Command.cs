@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using TwitchLib.Client.Models;
 
-namespace BapesBot.Service.Commands
+namespace GolfClapBot.Service.Commands
 {
     public abstract class Command : ICommand
     {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using TwitchLib.Client.Events;
 
-namespace BapesBot.Service.CommandManager
+namespace GolfClapBot.Service.CommandManager
 {
     public interface ICommandManager
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BapesBot.Service.SoundEffects
+namespace GolfClapBot.Service.SoundEffects
 {
     /// <summary>
     ///     Play the golf clap sound effect.

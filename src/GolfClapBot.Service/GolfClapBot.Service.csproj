@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BapesBot.Domain\BapesBot.Domain.csproj" />
+    <ProjectReference Include="..\GolfClapBot.Domain\GolfClapBot.Domain.csproj" />
   </ItemGroup>
 
 </Project>

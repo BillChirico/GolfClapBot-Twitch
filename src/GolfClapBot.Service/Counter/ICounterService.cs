@@ -1,6 +1,6 @@
-﻿using BapesBot.Domain.Counter;
+﻿using GolfClapBot.Domain.Counter;
 
-namespace BapesBot.Service.Counter
+namespace GolfClapBot.Service.Counter
 {
     /// <summary>
     ///     Interface for the CounterService

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using TwitchLib.Client.Interfaces;
 using TwitchLib.Client.Models;
 
-namespace BapesBot.Service.Commands
+namespace GolfClapBot.Service.Commands
 {
     /// <summary>
     ///     Sends a message if the bot is running.

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Models;
 
-namespace BapesBot.Service.Commands
+namespace GolfClapBot.Service.Commands
 {
     public interface ICommand
     {

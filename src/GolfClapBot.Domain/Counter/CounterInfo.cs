@@ -1,4 +1,4 @@
-﻿namespace BapesBot.Domain.Counter
+﻿namespace GolfClapBot.Domain.Counter
 {
     /// <summary>
     /// Properties for CounterService

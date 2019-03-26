@@ -1,6 +1,6 @@
-﻿using BapesBot.Domain.Settings;
+﻿using GolfClapBot.Domain.Settings;
 
-namespace BapesBot.Service.Settings
+namespace GolfClapBot.Service.Settings
 {
     /// <summary>
     /// Interface for the SettingsService

@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BapesBot.Service.CommandManager;
-using BapesBot.Service.SoundEffects;
+using GolfClapBot.Service.CommandManager;
+using GolfClapBot.Service.SoundEffects;
 using TwitchLib.Client.Events;
 
-namespace BapesBot.Service.SoundEffectManager
+namespace GolfClapBot.Service.SoundEffectManager
 {
     public class SoundEffectManager : ICommandManager
     {

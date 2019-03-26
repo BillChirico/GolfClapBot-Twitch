@@ -1,7 +1,7 @@
-﻿using BapesBot.Domain.Settings;
+﻿using GolfClapBot.Domain.Settings;
 using Microsoft.Extensions.Configuration;
 
-namespace BapesBot.Service.Settings
+namespace GolfClapBot.Service.Settings
 {
     public class SettingsService : ISettingsService
     {

@@ -1,12 +1,12 @@
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
-using BapesBot.Service.CommandManager;
+using GolfClapBot.Service.CommandManager;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
 using TwitchLib.Client.Models;
 
-namespace BapesBot.Service.TwitchBot
+namespace GolfClapBot.Service.TwitchBot
 {
     public class TwitchBot : ITwitchBot
     {

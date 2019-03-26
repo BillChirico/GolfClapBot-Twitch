@@ -1,4 +1,4 @@
-﻿namespace BapesBot.Domain.Settings
+﻿namespace GolfClapBot.Domain.Settings
 {
     /// <summary>
     /// Properties for TwitchBot
