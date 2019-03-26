@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using BapesBot.Service.Commands;
+using GolfClapBot.Service.Commands;
 using TwitchLib.Client.Models;
 
-namespace BapesBot.Service.SoundEffects
+namespace GolfClapBot.Service.SoundEffects
 {
     public class SoundEffect : ICommand
     {
