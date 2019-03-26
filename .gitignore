@@ -331,4 +331,4 @@ ASALocalRun/
 
 # vscode files
 .vscode/
-/src/BapesBot.Console/appsettings.json
+/src/GolfClapBot.Console/appsettings.json
