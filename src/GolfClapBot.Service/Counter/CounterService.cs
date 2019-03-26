@@ -41,7 +41,7 @@ namespace GolfClapBot.Service.Counter
         /// <inheritdoc />
         public CounterInfo AddCounter(string key)
         {
-            var counter = new CounterInfo {Name = key};
+            var counter = new CounterInfo { Name = key };
             _counterInfo.Add(key, counter);
 
             return counter;

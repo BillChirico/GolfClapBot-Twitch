@@ -9,7 +9,7 @@ namespace GolfClapBot.Service.Commands
     {
         private readonly ITwitchClient _twitchClient;
 
-        public HelpCommand(ITwitchClient twitchClient) : base(new List<string> {"help", "hp"})
+        public HelpCommand(ITwitchClient twitchClient) : base(new List<string> { "help", "hp" })
 
         {
             _twitchClient = twitchClient;

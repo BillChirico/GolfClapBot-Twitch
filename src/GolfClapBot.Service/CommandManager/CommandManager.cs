@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BapesBot.Service.Commands;
-using BapesBot.Service.MessageHelpers;
+using GolfClapBot.Service.Commands;
+using GolfClapBot.Service.MessageHelpers;
 using TwitchLib.Client.Events;
 
-namespace BapesBot.Service.CommandManager
+namespace GolfClapBot.Service.CommandManager
 {
     public class CommandManager : ICommandManager
     {
