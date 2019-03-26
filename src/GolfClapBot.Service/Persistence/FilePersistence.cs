@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using GolfClapBot.Service.Commands;
 using Newtonsoft.Json;
 
 namespace GolfClapBot.Service.Persistence
@@ -28,9 +29,13 @@ namespace GolfClapBot.Service.Persistence
             }
         }
 
-        public T Get()
+        public T Get(Command command)
         {
-            throw new NotImplementedException();
+            var fileInfo =
+                new FileInfo(
+                    $"{Directory.GetCurrentDirectory()}/Settings/{command.CommandTriggers.FirstOrDefault()}.json");
+            
+            return fileInfo.Exists ? JsonConvert.DeserializeObject<T>(File.ReadAllText(fileInfo.FullName)) : null;
         }
     }
 }
