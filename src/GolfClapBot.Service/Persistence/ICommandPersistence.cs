@@ -1,4 +1,4 @@
-using GolfClapBot.Service.Commands;
+using GolfClapBot.Domain.CommandSettings;
 
 namespace GolfClapBot.Service.Persistence
 {
@@ -6,7 +6,7 @@ namespace GolfClapBot.Service.Persistence
     ///     Persistence for command settings.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface ICommandPersistence<T> where T : CommandSettings.CommandSettings
+    public interface ICommandPersistence<T> where T : CommandSettings
     {
         /// <summary>
         ///     Save command settings.
@@ -17,8 +17,8 @@ namespace GolfClapBot.Service.Persistence
         /// <summary>
         ///     Get command settings.
         /// </summary>
-        /// <param name="command">Command to get.</param>
+        /// <param name="commandName">Command to get.</param>
         /// <returns>Command settings deserialized to model.</returns>
-        T Get(Command command);
+        T Get(string commandName);
     }
 }
