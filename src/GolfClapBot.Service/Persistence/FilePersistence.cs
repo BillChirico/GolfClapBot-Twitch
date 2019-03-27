@@ -6,8 +6,12 @@ using Newtonsoft.Json;
 
 namespace GolfClapBot.Service.Persistence
 {
+    /// <summary>
+    ///     Save command settings to a file.
+    /// </summary>
     public class FilePersistence<T> : ICommandPersistence<T> where T : CommandSettings.CommandSettings
     {
+        /// <inheritdoc />
         public void Save(T value)
         {
             try
@@ -25,17 +29,27 @@ namespace GolfClapBot.Service.Persistence
             }
             catch (Exception exception)
             {
-                Console.WriteLine($"Erroring while saving: {exception.Message}");
+                Console.WriteLine($"Erroring while saving command settings: {exception.Message}");
             }
         }
 
+        /// <inheritdoc />
         public T Get(Command command)
         {
-            var fileInfo =
-                new FileInfo(
-                    $"{Directory.GetCurrentDirectory()}/Settings/{command.CommandTriggers.FirstOrDefault()}.json");
-            
-            return fileInfo.Exists ? JsonConvert.DeserializeObject<T>(File.ReadAllText(fileInfo.FullName)) : null;
+            try
+            {
+                var fileInfo =
+                    new FileInfo(
+                        $"{Directory.GetCurrentDirectory()}/Settings/{command.CommandTriggers.FirstOrDefault()}.json");
+
+                return fileInfo.Exists ? JsonConvert.DeserializeObject<T>(File.ReadAllText(fileInfo.FullName)) : null;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"Erroring while getting command settings: {exception.Message}");
+
+                return null;
+            }
         }
     }
 }
