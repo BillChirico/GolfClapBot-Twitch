@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -14,6 +13,7 @@ using GolfClapBot.Service.SoundEffects;
 using GolfClapBot.Service.TwitchApi;
 using GolfClapBot.Service.TwitchApiHelper;
 using GolfClapBot.Service.TwitchBot;
+using GolfClapBot.Service.VariableManager.Variables;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TwitchLib.Client;
@@ -48,26 +48,30 @@ namespace GolfClapBot.Console
                 .AddSingleton<ICommandManager, CommandManager>()
 
                 // Commands
-                .RegisterAllTypes<Command>(new[] {typeof(Command).Assembly}, ServiceLifetime.Scoped)
+                .RegisterAllSubClassTypes<Command>(new[] {typeof(Command).Assembly}, ServiceLifetime.Scoped)
                 .AddSingleton<IList<Command>>(s => s.GetServices<Command>().ToList())
 
                 // Sound Effects Manager
                 .AddSingleton<SoundEffectManager>()
 
                 // Sound Effects
-                .RegisterAllTypes<SoundEffect>(new[] {typeof(SoundEffect).Assembly}, ServiceLifetime.Scoped)
+                .RegisterAllSubClassTypes<SoundEffect>(new[] {typeof(SoundEffect).Assembly}, ServiceLifetime.Scoped)
                 .AddSingleton<IList<SoundEffect>>(s => s.GetServices<SoundEffect>().ToList())
 
                 // Twitch
                 .AddSingleton<ITwitchClient, TwitchClient>()
                 .AddSingleton<ITwitchBot, TwitchBot>()
-                
+
                 // Twitch Api
                 .AddSingleton<TwitchApiFactory>()
                 .AddSingleton(provider => provider.GetRequiredService<TwitchApiFactory>().Create())
-                
+
                 // Helpers
                 .AddSingleton<ITwitchApiHelper, TwitchApiHelper>()
+
+                // Variables
+                .RegisterAllInterfaceTypes<IVariable>(new[] {typeof(IVariable).Assembly}, ServiceLifetime.Singleton)
+                .AddSingleton<IList<IVariable>>(s => s.GetServices<IVariable>().ToList())
 
                 // Counter
                 .AddSingleton<ICounterService, CounterService>()
@@ -88,12 +92,33 @@ namespace GolfClapBot.Console
         /// <param name="assemblies">Assemblies to parse.</param>
         /// <param name="lifetime">Lifetime of the service.</param>
         /// <typeparam name="T">Base type of subclasses to register.</typeparam>
-        public static IServiceCollection RegisterAllTypes<T>(this IServiceCollection services,
+        public static IServiceCollection RegisterAllSubClassTypes<T>(this IServiceCollection services,
             IEnumerable<Assembly> assemblies,
             ServiceLifetime lifetime = ServiceLifetime.Transient)
         {
             var typesFromAssemblies =
                 assemblies.SelectMany(a => a.DefinedTypes.Where(x => x.GetTypeInfo().IsSubclassOf(typeof(T))));
+
+            foreach (var type in typesFromAssemblies)
+                services.Add(new ServiceDescriptor(typeof(T), type, lifetime));
+
+            return services;
+        }
+
+        /// <summary>
+        ///     Register all types that are an interface of the type specified.
+        /// </summary>
+        /// <param name="services">Collection to add to.</param>
+        /// <param name="assemblies">Assemblies to parse.</param>
+        /// <param name="lifetime">Lifetime of the service.</param>
+        /// <typeparam name="T">Base type of interface to register.</typeparam>
+        public static IServiceCollection RegisterAllInterfaceTypes<T>(this IServiceCollection services,
+            IEnumerable<Assembly> assemblies,
+            ServiceLifetime lifetime = ServiceLifetime.Transient)
+        {
+            var typesFromAssemblies =
+                assemblies.SelectMany(a => a.DefinedTypes.Where(x => x.GetInterfaces().Contains(typeof(T))));
+
             foreach (var type in typesFromAssemblies)
                 services.Add(new ServiceDescriptor(typeof(T), type, lifetime));
 
