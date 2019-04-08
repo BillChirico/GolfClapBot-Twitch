@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GolfClapBot.Domain.Constants;
 using GolfClapBot.Service.Commands;
 using GolfClapBot.Service.MessageHelpers;
 using TwitchLib.Client.Events;
@@ -19,6 +20,11 @@ namespace GolfClapBot.Service.CommandManager
 
         public async Task MessageReceived(object sender, OnMessageReceivedArgs message)
         {
+            // Don't run a command if it is from a known bot
+            if (Constants.KnownBots.Any(bot =>
+                bot.Equals(message.ChatMessage.Username, StringComparison.InvariantCultureIgnoreCase)))
+                return;
+
             // Don't check for commands if the message doesn't start with a prefix
             if (!(message.ChatMessage.Message.StartsWith("$") || message.ChatMessage.Message.StartsWith("!"))) return;
 

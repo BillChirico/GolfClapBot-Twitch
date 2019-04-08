@@ -7,7 +7,7 @@ namespace GolfClapBot.Service.SoundEffects
     /// </summary>
     public class GolfClap : SoundEffect
     {
-        public GolfClap() : base(new List<string> {"thebapGolfclap", "!golfclap", "golfclap"},
+        public GolfClap() : base(new List<string> {"thebapGolfclap", "!golfclap", "$golfclap"},
             "./SoundFiles/GolfClap.wav")
         {
         }
