@@ -13,6 +13,7 @@ using GolfClapBot.Service.SoundEffects;
 using GolfClapBot.Service.TwitchApi;
 using GolfClapBot.Service.TwitchApiHelper;
 using GolfClapBot.Service.TwitchBot;
+using GolfClapBot.Service.VariableManager;
 using GolfClapBot.Service.VariableManager.Variables;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -69,9 +70,12 @@ namespace GolfClapBot.Console
                 // Helpers
                 .AddSingleton<ITwitchApiHelper, TwitchApiHelper>()
 
+                // Variable Manager
+                .AddSingleton<IVariableManager, VariableManager>()
+
                 // Variables
-                .RegisterAllInterfaceTypes<IVariable>(new[] {typeof(IVariable).Assembly}, ServiceLifetime.Singleton)
-                .AddSingleton<IList<IVariable>>(s => s.GetServices<IVariable>().ToList())
+                .RegisterAllSubClassTypes<Variable>(new[] {typeof(Variable).Assembly}, ServiceLifetime.Singleton)
+                .AddSingleton<IList<Variable>>(s => s.GetServices<Variable>().ToList())
 
                 // Counter
                 .AddSingleton<ICounterService, CounterService>()
