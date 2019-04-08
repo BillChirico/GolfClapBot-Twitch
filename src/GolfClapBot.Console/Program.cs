@@ -11,6 +11,8 @@ using GolfClapBot.Service.Counter;
 using GolfClapBot.Service.Settings;
 using GolfClapBot.Service.SoundEffectManager;
 using GolfClapBot.Service.SoundEffects;
+using GolfClapBot.Service.TwitchApi;
+using GolfClapBot.Service.TwitchApiHelper;
 using GolfClapBot.Service.TwitchBot;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -59,6 +61,13 @@ namespace GolfClapBot.Console
                 // Twitch
                 .AddSingleton<ITwitchClient, TwitchClient>()
                 .AddSingleton<ITwitchBot, TwitchBot>()
+                
+                // Twitch Api
+                .AddSingleton<TwitchApiFactory>()
+                .AddSingleton(provider => provider.GetRequiredService<TwitchApiFactory>().Create())
+                
+                // Helpers
+                .AddSingleton<ITwitchApiHelper, TwitchApiHelper>()
 
                 // Counter
                 .AddSingleton<ICounterService, CounterService>()
