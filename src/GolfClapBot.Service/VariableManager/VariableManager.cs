@@ -23,5 +23,16 @@ namespace GolfClapBot.Service.VariableManager
 
             return message;
         }
+
+        /// <inheritdoc />
+        public async Task<string[]> InjectVariables(VariableContext variableContext, string[] messages)
+        {
+            foreach (var variable in _variables)
+                for (var i = 0; i < messages.Length; i++)
+                    messages[i] = messages[i].Replace($"{{{variable.VariableName}}}",
+                        await variable.GetValue(variableContext));
+
+            return messages;
+        }
     }
 }
