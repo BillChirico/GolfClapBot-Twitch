@@ -62,20 +62,6 @@ namespace GolfClapBot.Service.Commands
             return Task.CompletedTask;
         }
 
-        public void SetArguments(string arithmetic, string key)
-        {
-            _arithmetic = arithmetic == "-" ? Arithmetic.Subtraction : Arithmetic.Addition;
-
-            _counterKey = key;
-        }
-
-        public void SetArguments(string arithmetic, string key, string test)
-        {
-            _arithmetic = arithmetic == "-" ? Arithmetic.Subtraction : Arithmetic.Addition;
-
-            _counterKey = key;
-        }
-
         private enum Arithmetic
         {
             Addition,
