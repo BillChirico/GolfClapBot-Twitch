@@ -13,6 +13,13 @@ namespace GolfClapBot.Service.Commands
 
         public List<string> CommandTriggers { get; }
 
+        /// <inheritdoc />
         public abstract Task<bool> Invoke(ChatMessage message);
+
+        /// <inheritdoc />
+        public virtual Task ProcessArgs(List<string> args)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

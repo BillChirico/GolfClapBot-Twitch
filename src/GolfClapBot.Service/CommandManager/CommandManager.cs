@@ -36,7 +36,7 @@ namespace GolfClapBot.Service.CommandManager
             var args = await _variableManager.InjectVariables(new VariableContext
             {
                 StreamerUserName = message.ChatMessage.Channel
-            }, Array.ConvertAll(MessageHelper.GetArguments(message.ChatMessage.Message), x => x.ToString()));
+            }, MessageHelper.GetArguments(message.ChatMessage.Message));
 
             var command = message.ChatMessage.Message.Substring(1);
 
@@ -46,20 +46,11 @@ namespace GolfClapBot.Service.CommandManager
 
             // List of commands that match the message
             var invokedCommands = _commands.Where(c =>
-                c.CommandTriggers.Any(ct => string.Equals(ct,
-                    command,
-                    StringComparison.InvariantCultureIgnoreCase)) && (c.GetType().GetMethod("SetArguments") == null ||
-                                                                      c.GetType().GetMethod("SetArguments")
-                                                                          .GetParameters()
-                                                                          .Length == args.Length));
+                c.CommandTriggers.Any(ct => string.Equals(ct, command, StringComparison.InvariantCultureIgnoreCase)));
 
             foreach (var invokedCommand in invokedCommands)
             {
-                var setArgumentsMethod = invokedCommand.GetType().GetMethod("SetArguments");
-
-                // Set arguments
-                if (setArgumentsMethod != null)
-                    setArgumentsMethod.Invoke(invokedCommand, args);
+                await invokedCommand.ProcessArgs(args);
 
                 await invokedCommand.Invoke(message.ChatMessage);
             }

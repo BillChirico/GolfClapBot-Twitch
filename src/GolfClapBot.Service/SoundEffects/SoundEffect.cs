@@ -35,5 +35,10 @@ namespace GolfClapBot.Service.SoundEffects
                 return Task.FromResult(false);
             }
         }
+
+        public Task ProcessArgs(List<string> args)
+        {
+            return Task.CompletedTask;
+        }
     }
 }

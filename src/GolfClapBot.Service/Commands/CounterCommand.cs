@@ -51,7 +51,25 @@ namespace GolfClapBot.Service.Commands
             return Task.FromResult(true);
         }
 
+        public override Task ProcessArgs(List<string> args)
+        {
+            if (args.Count != 2) return Task.CompletedTask;
+
+            _arithmetic = args[0] == "-" ? Arithmetic.Subtraction : Arithmetic.Addition;
+
+            _counterKey = args[1];
+
+            return Task.CompletedTask;
+        }
+
         public void SetArguments(string arithmetic, string key)
+        {
+            _arithmetic = arithmetic == "-" ? Arithmetic.Subtraction : Arithmetic.Addition;
+
+            _counterKey = key;
+        }
+
+        public void SetArguments(string arithmetic, string key, string test)
         {
             _arithmetic = arithmetic == "-" ? Arithmetic.Subtraction : Arithmetic.Addition;
 

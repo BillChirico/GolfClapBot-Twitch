@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GolfClapBot.Domain.Variables;
 
@@ -22,6 +23,6 @@ namespace GolfClapBot.Service.VariableManager
         /// <param name="variableContext">Context for the variables.</param>
         /// <param name="messages">Messages to inject variables into.</param>
         /// <returns>Messages with variables replaces.</returns>
-        Task<string[]> InjectVariables(VariableContext variableContext, string[] messages);
+        Task<List<string>> InjectVariables(VariableContext variableContext, List<string> messages);
     }
 }

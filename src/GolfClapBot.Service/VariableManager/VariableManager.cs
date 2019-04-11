@@ -25,10 +25,10 @@ namespace GolfClapBot.Service.VariableManager
         }
 
         /// <inheritdoc />
-        public async Task<string[]> InjectVariables(VariableContext variableContext, string[] messages)
+        public async Task<List<string>> InjectVariables(VariableContext variableContext, List<string> messages)
         {
             foreach (var variable in _variables)
-                for (var i = 0; i < messages.Length; i++)
+                for (var i = 0; i < messages.Count; i++)
                     messages[i] = messages[i].Replace($"{{{variable.VariableName}}}",
                         await variable.GetValue(variableContext));
 
