@@ -28,7 +28,7 @@ namespace GolfClapBot.Service.TwitchBot
             _twitchClient.OnLog += OnLog;
             _twitchClient.Connect();
 
-            _twitchClient.OnConnected += (sender, args) => { _twitchClient.JoinChannel("bapes"); };
+            _twitchClient.OnConnected += (sender, args) => { _twitchClient.JoinChannel(channel); };
 
             _twitchClient.OnMessageReceived += async (sender, message) =>
             {
