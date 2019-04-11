@@ -25,6 +25,11 @@ namespace GolfClapBot.Service.Commands
 
         public override Task<bool> Invoke(ChatMessage message)
         {
+            // Temporary fix to restrict command
+            // TODO: Create proper permissions system
+            if (!(message.IsModerator || message.IsBroadcaster))
+                return Task.FromResult(false);
+
             var counter = _counterService.GetCounter(_counterKey) ?? _counterService.AddCounter(_counterKey);
 
             switch (_arithmetic)

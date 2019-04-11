@@ -24,7 +24,9 @@ namespace GolfClapBot.Service.VariableManager.Variables
         /// <returns>Game name that is currently being streamed.</returns>
         public override async Task<string> GetValue(VariableContext variableContext)
         {
-            return (await _twitchApiHelper.GetStreamGame(variableContext.StreamerUserName)).Name;
+            var game = await _twitchApiHelper.GetStreamGame(variableContext.StreamerUserName);
+
+            return game == null ? "" : game.Name;
         }
     }
 }
