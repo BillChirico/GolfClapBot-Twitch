@@ -9,6 +9,7 @@ namespace GolfClapBot.Service.TwitchBot
         /// </summary>
         /// <param name="twitchUsername">Twitch Username of the bot to connect.</param>
         /// <param name="accessToken">Access token of the bot to connect.</param>
-        Task Connect(string twitchUsername, string accessToken);
+        /// <param name="channel">Channel to connect the bot to.</param>
+        Task Connect(string twitchUsername, string accessToken, string channel);
     }
 }
