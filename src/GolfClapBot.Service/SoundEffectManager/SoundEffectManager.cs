@@ -23,15 +23,10 @@ namespace GolfClapBot.Service.SoundEffectManager
             // TODO: Use settings to enable/disable sound effects
             if (!message.ChatMessage.Channel.Equals("Bapes", StringComparison.InvariantCultureIgnoreCase))
                 return;
-            
-            // Don't run a command if it is from a known bot
-            if (Constants.KnownBots.Any(bot =>
-                bot.Equals(message.ChatMessage.Username, StringComparison.InvariantCultureIgnoreCase)))
-                return;
 
             // List of commands that match the message
             var invokedSoundEffects =
-                _soundEffects.Where(s => s.SoundEffectTriggers.Any(ct => message.ChatMessage.Message.Contains(ct)));
+                _soundEffects.Where(s => s.CommandTriggers.Any(ct => message.ChatMessage.Message.Contains(ct)));
 
             foreach (var soundEffect in invokedSoundEffects) await soundEffect.Invoke(message.ChatMessage);
         }

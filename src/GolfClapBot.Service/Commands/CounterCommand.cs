@@ -51,11 +51,15 @@ namespace GolfClapBot.Service.Commands
             return Task.FromResult(true);
         }
 
-        public void SetArguments(string arithmetic, string key)
+        public override Task<bool> ProcessArgs(List<string> args)
         {
-            _arithmetic = arithmetic == "-" ? Arithmetic.Subtraction : Arithmetic.Addition;
+            if (args.Count != 2) return Task.FromResult(false);
 
-            _counterKey = key;
+            _arithmetic = args[0] == "-" ? Arithmetic.Subtraction : Arithmetic.Addition;
+
+            _counterKey = args[1];
+
+            return Task.FromResult(true);
         }
 
         private enum Arithmetic

@@ -1,6 +1,8 @@
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
+using GolfClapBot.Domain.Constants;
 using GolfClapBot.Service.CommandManager;
 using TwitchLib.Client.Events;
 using TwitchLib.Client.Interfaces;
@@ -32,6 +34,11 @@ namespace GolfClapBot.Service.TwitchBot
 
             _twitchClient.OnMessageReceived += async (sender, message) =>
             {
+                // Don't run a command if it is from a known bot
+                if (Constants.KnownBots.Any(bot =>
+                    bot.Equals(message.ChatMessage.Username, StringComparison.InvariantCultureIgnoreCase)))
+                    return;
+
                 await _commandManager.MessageReceived(sender, message);
                 await _soundEffectManager.MessageReceived(sender, message);
             };
