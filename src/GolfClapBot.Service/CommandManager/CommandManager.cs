@@ -8,29 +8,28 @@ using GolfClapBot.Service.Commands;
 using GolfClapBot.Service.MessageHelpers;
 using GolfClapBot.Service.VariableManager;
 using TwitchLib.Client.Events;
+using TwitchLib.Client.Interfaces;
 
 namespace GolfClapBot.Service.CommandManager
 {
     public class CommandManager : ICommandManager
     {
         private readonly IList<Command> _commands;
+        private readonly ITwitchClient _twitchClient;
         private readonly IVariableManager _variableManager;
 
-        public CommandManager(IList<Command> commands, IVariableManager variableManager)
+        public CommandManager(IList<Command> commands, IVariableManager variableManager, ITwitchClient twitchClient)
         {
             _commands = commands;
             _variableManager = variableManager;
+            _twitchClient = twitchClient;
         }
 
         public async Task MessageReceived(object sender, OnMessageReceivedArgs message)
         {
-            // Don't run a command if it is from a known bot
-            if (Constants.KnownBots.Any(bot =>
-                bot.Equals(message.ChatMessage.Username, StringComparison.InvariantCultureIgnoreCase)))
+            // Don't run the command if it does not start with a prefix
+            if (!Constants.CommandPrefixes.Contains(message.ChatMessage.Message[0].ToString()))
                 return;
-
-            // Don't check for commands if the message doesn't start with a prefix
-            if (!(message.ChatMessage.Message.StartsWith("$") || message.ChatMessage.Message.StartsWith("!"))) return;
 
             // Get arguments and inject variables
             var args = await _variableManager.InjectVariables(new VariableContext
@@ -38,11 +37,7 @@ namespace GolfClapBot.Service.CommandManager
                 StreamerUserName = message.ChatMessage.Channel
             }, MessageHelper.GetArguments(message.ChatMessage.Message));
 
-            var command = message.ChatMessage.Message.Substring(1);
-
-            // Remove arguments
-            if (message.ChatMessage.Message.Contains(' '))
-                command = command.Remove(command.IndexOf(' '));
+            var command = MessageHelper.GetCommand(message.ChatMessage.Message);
 
             // List of commands that match the message
             var invokedCommands = _commands.Where(c =>
@@ -50,9 +45,13 @@ namespace GolfClapBot.Service.CommandManager
 
             foreach (var invokedCommand in invokedCommands)
             {
-                await invokedCommand.ProcessArgs(args);
+                var result = await invokedCommand.ProcessArgs(args);
 
-                await invokedCommand.Invoke(message.ChatMessage);
+                if (result)
+                    await invokedCommand.Invoke(message.ChatMessage);
+                else
+                    _twitchClient.SendMessage(message.ChatMessage.Channel,
+                        "Command Error: Invalid number of parameters!");
             }
         }
     }

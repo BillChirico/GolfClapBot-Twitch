@@ -27,12 +27,22 @@ namespace GolfClapBot.Service.Commands
 
         public override async Task<bool> Invoke(ChatMessage message)
         {
-            var game = (await _twitchApiHelper.GetStreamGame(message.Channel)).Name;
+            var game = await _twitchApiHelper.GetStreamGame(message.Channel);
+
+            if (game == null)
+            {
+                _twitchClient.SendMessage(message.Channel,
+                    "The streamer either is not online or does not have a game set!");
+
+                return await Task.FromResult(false);
+            }
 
             var counter = _counterService.GetCounter($"{game}Wins");
 
             _twitchClient.SendMessage(message.Channel,
-                counter == null ? $"There are no wins recorded for {game}!" : $"Current {game} Wins: {counter.Count}");
+                counter == null
+                    ? $"There are no wins recorded for {game.Name}!"
+                    : $"Current {game.Name} Wins: {counter.Count}");
 
             return await Task.FromResult(true);
         }

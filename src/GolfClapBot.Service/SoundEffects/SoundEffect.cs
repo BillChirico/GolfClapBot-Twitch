@@ -10,13 +10,13 @@ namespace GolfClapBot.Service.SoundEffects
     {
         protected SoundEffect(List<string> soundEffectTriggers, string file)
         {
-            SoundEffectTriggers = soundEffectTriggers;
+            CommandTriggers = soundEffectTriggers;
             File = file;
         }
 
-        public List<string> SoundEffectTriggers { get; }
-
         private string File { get; }
+
+        public List<string> CommandTriggers { get; }
 
         /// <summary>
         ///     Play sound effect.
@@ -36,9 +36,9 @@ namespace GolfClapBot.Service.SoundEffects
             }
         }
 
-        public Task ProcessArgs(List<string> args)
+        public Task<bool> ProcessArgs(List<string> args)
         {
-            return Task.CompletedTask;
+            return Task.FromResult(true);
         }
     }
 }

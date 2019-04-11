@@ -17,9 +17,9 @@ namespace GolfClapBot.Service.Commands
         public abstract Task<bool> Invoke(ChatMessage message);
 
         /// <inheritdoc />
-        public virtual Task ProcessArgs(List<string> args)
+        public virtual Task<bool> ProcessArgs(List<string> args)
         {
-            return Task.CompletedTask;
+            return Task.FromResult(true);
         }
     }
 }

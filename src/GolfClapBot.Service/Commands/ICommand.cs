@@ -7,6 +7,11 @@ namespace GolfClapBot.Service.Commands
     public interface ICommand
     {
         /// <summary>
+        ///     Triggers used to invoke the command.
+        /// </summary>
+        List<string> CommandTriggers { get; }
+
+        /// <summary>
         ///     Invoke the command.
         /// </summary>
         /// <param name="message">Message received.</param>
@@ -16,6 +21,6 @@ namespace GolfClapBot.Service.Commands
         ///     Process arguments for the command.
         /// </summary>
         /// <param name="args">Arguments passed.</param>
-        Task ProcessArgs(List<string> args);
+        Task<bool> ProcessArgs(List<string> args);
     }
 }

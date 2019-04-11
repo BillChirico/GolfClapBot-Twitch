@@ -9,7 +9,14 @@ namespace GolfClapBot.Domain.Constants
             "StreamElements",
             "StreamLabs",
             "BapesBot",
-            "GolfClapBot"
+            "GolfClapBot",
+            "Nightbot"
+        };
+
+        public static readonly List<string> CommandPrefixes = new List<string>
+        {
+            "$",
+            "!"
         };
     }
 }
