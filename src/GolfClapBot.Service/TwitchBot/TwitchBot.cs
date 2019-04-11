@@ -22,13 +22,13 @@ namespace GolfClapBot.Service.TwitchBot
             _soundEffectManager = soundEffectManager;
         }
 
-        public Task Connect(string twitchUsername, string accessToken)
+        public Task Connect(string twitchUsername, string accessToken, string channel)
         {
             _twitchClient.Initialize(new ConnectionCredentials(twitchUsername, accessToken));
             _twitchClient.OnLog += OnLog;
             _twitchClient.Connect();
 
-            _twitchClient.OnConnected += (sender, args) => { _twitchClient.JoinChannel("bapes"); };
+            _twitchClient.OnConnected += (sender, args) => { _twitchClient.JoinChannel(channel); };
 
             _twitchClient.OnMessageReceived += async (sender, message) =>
             {
