@@ -30,7 +30,7 @@ namespace GolfClapBot.Console
             var twitchBot = serviceCollection.GetRequiredService<ITwitchBot>();
             var twitchSettings = serviceCollection.GetRequiredService<ISettingsService>().GeTwitchSettings();
 
-            await twitchBot.Connect(twitchSettings.Username, twitchSettings.AccessToken);
+            await twitchBot.Connect(twitchSettings.Username, twitchSettings.AccessToken, twitchSettings.Channel);
 
             await Task.Delay(Timeout.Infinite);
         }
