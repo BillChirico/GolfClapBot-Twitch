@@ -20,6 +20,10 @@ namespace GolfClapBot.Service.SoundEffectManager
 
         public async Task MessageReceived(object sender, OnMessageReceivedArgs message)
         {
+            // TODO: Use settings to enable/disable sound effects
+            if (!message.ChatMessage.Channel.Equals("Bapes", StringComparison.InvariantCultureIgnoreCase))
+                return;
+            
             // Don't run a command if it is from a known bot
             if (Constants.KnownBots.Any(bot =>
                 bot.Equals(message.ChatMessage.Username, StringComparison.InvariantCultureIgnoreCase)))
