@@ -26,10 +26,8 @@ namespace GolfClapBot.Service.TwitchBot
 
         public Task Connect(string twitchUsername, string accessToken, string channel)
         {
-            _twitchClient.Initialize(new ConnectionCredentials(twitchUsername, accessToken));
+            _twitchClient.Initialize(new ConnectionCredentials(twitchUsername, accessToken), channel);
             _twitchClient.OnLog += OnLog;
-
-            _twitchClient.OnConnected += (sender, args) => _twitchClient.JoinChannel(channel);
 
             _twitchClient.OnMessageReceived += async (sender, message) =>
             {
