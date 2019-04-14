@@ -28,9 +28,8 @@ namespace GolfClapBot.Service.TwitchBot
         {
             _twitchClient.Initialize(new ConnectionCredentials(twitchUsername, accessToken));
             _twitchClient.OnLog += OnLog;
-            _twitchClient.Connect();
 
-            _twitchClient.OnConnected += (sender, args) => { _twitchClient.JoinChannel(channel); };
+            _twitchClient.OnConnected += (sender, args) => _twitchClient.JoinChannel(channel);
 
             _twitchClient.OnMessageReceived += async (sender, message) =>
             {
@@ -42,6 +41,8 @@ namespace GolfClapBot.Service.TwitchBot
                 await _commandManager.MessageReceived(sender, message);
                 await _soundEffectManager.MessageReceived(sender, message);
             };
+
+            _twitchClient.Connect();
 
             return Task.CompletedTask;
         }
