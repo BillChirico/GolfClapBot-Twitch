@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using GolfClapBot.Domain.Settings;
+using GolfClapBot.Service.ApiHelper;
 using GolfClapBot.Service.CommandManager;
 using GolfClapBot.Service.Commands;
 using GolfClapBot.Service.Counter;
@@ -80,6 +82,10 @@ namespace GolfClapBot.Console
 
                 // Counter
                 .AddSingleton<ICounterService, CounterService>()
+
+                // HTTP
+                .AddSingleton<HttpClient>()
+                .AddSingleton(typeof(IApiHelper<>), typeof(ApiHelper<>))
 
                 // Settings
                 .AddSingleton(configuration)
