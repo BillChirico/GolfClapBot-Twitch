@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GolfClapBot.Domain.Constants;
+using GolfClapBot.Domain.Settings;
 using GolfClapBot.Service.CommandManager;
 using GolfClapBot.Service.SoundEffects;
+using Microsoft.Extensions.Options;
 using TwitchLib.Client.Events;
 
 namespace GolfClapBot.Service.SoundEffectManager
 {
     public class SoundEffectManager : ICommandManager
     {
+        private readonly GolfClapBotSettings _settings;
         private readonly IList<SoundEffect> _soundEffects;
 
-        public SoundEffectManager(IList<SoundEffect> soundEffects)
+        public SoundEffectManager(IList<SoundEffect> soundEffects, IOptions<GolfClapBotSettings> settings)
         {
             _soundEffects = soundEffects;
+            _settings = settings.Value;
         }
 
         public async Task MessageReceived(object sender, OnMessageReceivedArgs message)
         {
-            // TODO: Use settings to enable/disable sound effects
-            if (!message.ChatMessage.Channel.Equals("Bapes", StringComparison.InvariantCultureIgnoreCase))
+            if (!_settings.EnableSoundEffects)
                 return;
 
             // List of commands that match the message

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using GolfClapBot.Domain.Settings;
 using GolfClapBot.Service.CommandManager;
 using GolfClapBot.Service.Commands;
 using GolfClapBot.Service.Counter;
@@ -83,7 +84,20 @@ namespace GolfClapBot.Console
                 // Settings
                 .AddSingleton(configuration)
                 .AddSingleton<ISettingsService, SettingsService>()
+                .Configure<GolfClapBotSettings>(GetSettings())
                 .BuildServiceProvider();
+        }
+
+        private static IConfigurationSection GetSettings()
+        {
+            var builder = new ConfigurationBuilder();
+
+            builder
+                .AddJsonFile("settings.json", false, true);
+
+            var configuration = builder.Build();
+
+            return configuration.GetSection(nameof(GolfClapBotSettings));
         }
     }
 
