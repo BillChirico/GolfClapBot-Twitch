@@ -1,6 +1,7 @@
 {
     "GolfClapBotSettings": {
         "EnableSoundEffects": true,
-        "FortniteName": "Bapes"
+        "FortniteName": "Bapes",
+        "FortnitePlatform": "pc"
     }
 }

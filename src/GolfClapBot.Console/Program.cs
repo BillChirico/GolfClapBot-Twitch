@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using GolfClapBot.Domain.Settings;
-using GolfClapBot.Service.ApiHelper;
 using GolfClapBot.Service.CommandManager;
 using GolfClapBot.Service.Commands;
 using GolfClapBot.Service.Counter;
+using GolfClapBot.Service.Integrations.Fortnite;
 using GolfClapBot.Service.Settings;
 using GolfClapBot.Service.SoundEffectManager;
 using GolfClapBot.Service.SoundEffects;
@@ -47,6 +47,12 @@ namespace GolfClapBot.Console
 
             var configuration = builder.Build();
 
+            // HTTP Clients
+            serviceCollection.AddHttpClient<IFortniteApi, FortniteApi>(options =>
+            {
+                options.BaseAddress = new Uri("https://api.fortnitetracker.com/v1/profile/");
+            });
+
             return serviceCollection
                 // Command Manager
                 .AddSingleton<ICommandManager, CommandManager>()
@@ -82,10 +88,6 @@ namespace GolfClapBot.Console
 
                 // Counter
                 .AddSingleton<ICounterService, CounterService>()
-
-                // HTTP
-                .AddSingleton<HttpClient>()
-                .AddSingleton(typeof(IApiHelper<>), typeof(ApiHelper<>))
 
                 // Settings
                 .AddSingleton(configuration)
