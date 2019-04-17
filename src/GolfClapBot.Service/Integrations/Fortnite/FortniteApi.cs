@@ -21,7 +21,8 @@ namespace GolfClapBot.Service.Integrations.Fortnite
         /// <inheritdoc />
         public async Task<FortniteStats> Get()
         {
-            _client.DefaultRequestHeaders.Add("TRN-Api-Key", _settings.FortniteTrackerApiKey);
+            if (!_client.DefaultRequestHeaders.Contains("TRN-Api-Key"))
+                _client.DefaultRequestHeaders.Add("TRN-Api-Key", _settings.FortniteTrackerApiKey);
             
             var response = await _client.GetAsync($"{_settings.FortnitePlatform}/{_settings.FortniteName}");
 
