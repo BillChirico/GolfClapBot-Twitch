@@ -5,5 +5,7 @@ namespace GolfClapBot.Domain.Settings
         public string FortniteName { get; set; }
         
         public string FortnitePlatform { get; set; }
+
+        public string FortniteTrackerApiKey { get; set; }
     }
 }

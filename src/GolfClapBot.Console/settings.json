@@ -4,6 +4,7 @@
     },
     "FortniteSettings": {
         "FortniteName": "Bapes",
-        "FortnitePlatform": "pc"
+        "FortnitePlatform": "pc",
+        "FortniteTrackerApiKey": "APIKEY"
     }
 }

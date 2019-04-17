@@ -93,7 +93,7 @@ namespace GolfClapBot.Console
                 .AddSingleton(configuration)
                 .AddSingleton<ISettingsService, SettingsService>()
                 .Configure<GolfClapBotSettings>(GetSettings(nameof(GolfClapBotSettings)))
-                .Configure<GolfClapBotSettings>(GetSettings(nameof(FortniteSettings)))
+                .Configure<FortniteSettings>(GetSettings(nameof(FortniteSettings)))
                 .BuildServiceProvider();
         }
 
