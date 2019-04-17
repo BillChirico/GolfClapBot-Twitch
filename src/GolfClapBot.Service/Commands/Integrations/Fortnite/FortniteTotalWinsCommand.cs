@@ -45,7 +45,7 @@ namespace GolfClapBot.Service.Commands.Integrations.Fortnite
             if (totalWins == null)
                 return await Task.FromResult(false);
 
-            _twitchClient.SendMessage(message.Channel, $"Total Wins: {totalWins.Value}");
+            _twitchClient.SendMessage(message.Channel, $"Total Fortnite Wins: {totalWins.Value}");
 
             return await Task.FromResult(true);
         }
