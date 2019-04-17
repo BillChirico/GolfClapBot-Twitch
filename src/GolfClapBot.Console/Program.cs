@@ -92,11 +92,12 @@ namespace GolfClapBot.Console
                 // Settings
                 .AddSingleton(configuration)
                 .AddSingleton<ISettingsService, SettingsService>()
-                .Configure<GolfClapBotSettings>(GetSettings())
+                .Configure<GolfClapBotSettings>(GetSettings(nameof(GolfClapBotSettings)))
+                .Configure<GolfClapBotSettings>(GetSettings(nameof(FortniteSettings)))
                 .BuildServiceProvider();
         }
 
-        private static IConfigurationSection GetSettings()
+        private static IConfigurationSection GetSettings(string section)
         {
             var builder = new ConfigurationBuilder();
 
@@ -105,7 +106,7 @@ namespace GolfClapBot.Console
 
             var configuration = builder.Build();
 
-            return configuration.GetSection(nameof(GolfClapBotSettings));
+            return configuration.GetSection(section);
         }
     }
 

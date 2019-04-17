@@ -10,9 +10,9 @@ namespace GolfClapBot.Service.Integrations.Fortnite
     public class FortniteApi : IFortniteApi
     {
         private readonly HttpClient _client;
-        private readonly GolfClapBotSettings _settings;
+        private readonly FortniteSettings _settings;
 
-        public FortniteApi(HttpClient client, IOptions<GolfClapBotSettings> settings)
+        public FortniteApi(HttpClient client, IOptions<FortniteSettings> settings)
         {
             _client = client;
             _settings = settings.Value;
