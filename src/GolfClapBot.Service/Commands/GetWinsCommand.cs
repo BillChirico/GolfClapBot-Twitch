@@ -37,7 +37,7 @@ namespace GolfClapBot.Service.Commands
                 return await Task.FromResult(false);
             }
 
-            var counter = _counterService.GetCounter($"{game}Wins");
+            var counter = _counterService.GetCounter($"{game.Name}Wins");
 
             _twitchClient.SendMessage(message.Channel,
                 counter == null
