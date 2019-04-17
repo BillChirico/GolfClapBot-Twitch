@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -8,6 +9,7 @@ using GolfClapBot.Domain.Settings;
 using GolfClapBot.Service.CommandManager;
 using GolfClapBot.Service.Commands;
 using GolfClapBot.Service.Counter;
+using GolfClapBot.Service.Integrations.Fortnite;
 using GolfClapBot.Service.Settings;
 using GolfClapBot.Service.SoundEffectManager;
 using GolfClapBot.Service.SoundEffects;
@@ -44,6 +46,12 @@ namespace GolfClapBot.Console
                 .AddJsonFile("appsettings.json", false, true);
 
             var configuration = builder.Build();
+
+            // HTTP Clients
+            serviceCollection.AddHttpClient<IFortniteApi, FortniteApi>(options =>
+            {
+                options.BaseAddress = new Uri("https://api.fortnitetracker.com/v1/profile/");
+            });
 
             return serviceCollection
                 // Command Manager
@@ -84,11 +92,12 @@ namespace GolfClapBot.Console
                 // Settings
                 .AddSingleton(configuration)
                 .AddSingleton<ISettingsService, SettingsService>()
-                .Configure<GolfClapBotSettings>(GetSettings())
+                .Configure<GolfClapBotSettings>(GetSettings(nameof(GolfClapBotSettings)))
+                .Configure<FortniteSettings>(GetSettings(nameof(FortniteSettings)))
                 .BuildServiceProvider();
         }
 
-        private static IConfigurationSection GetSettings()
+        private static IConfigurationSection GetSettings(string section)
         {
             var builder = new ConfigurationBuilder();
 
@@ -97,7 +106,7 @@ namespace GolfClapBot.Console
 
             var configuration = builder.Build();
 
-            return configuration.GetSection(nameof(GolfClapBotSettings));
+            return configuration.GetSection(section);
         }
     }
 

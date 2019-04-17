@@ -1,5 +1,10 @@
 {
     "GolfClapBotSettings": {
         "EnableSoundEffects": true
+    },
+    "FortniteSettings": {
+        "FortniteName": "Bapes",
+        "FortnitePlatform": "pc",
+        "FortniteTrackerApiKey": "APIKEY"
     }
 }
