@@ -12,7 +12,7 @@ namespace GolfClapBot.Service.Commands
     {
         private readonly ITwitchClient _twitchClient;
 
-        public StatusCommand(ITwitchClient twitchClient) : base(new List<string> { "status", "st" })
+        public StatusCommand(ITwitchClient twitchClient) : base(new List<string> {"status", "st"})
 
         {
             _twitchClient = twitchClient;

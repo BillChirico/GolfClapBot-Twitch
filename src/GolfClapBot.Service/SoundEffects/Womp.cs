@@ -7,7 +7,7 @@ namespace GolfClapBot.Service.SoundEffects
     /// </summary>
     public class Womp : SoundEffect
     {
-        public Womp() : base(new List<string> { "thebapWomp", "!womp", "womp" },
+        public Womp() : base(new List<string> {"thebapWomp", "!womp", "$womp"},
             "./SoundFiles/Womp.wav")
         {
         }

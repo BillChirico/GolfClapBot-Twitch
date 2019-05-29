@@ -17,7 +17,8 @@ namespace GolfClapBot.Service.Counter
         /// <summary>
         ///     Removes one from a Counter.
         /// </summary>
-        /// <param name="counter">Counter to remove one from.</param>w
+        /// <param name="counter">Counter to remove one from.</param>
+        /// w
         /// <returns>Updated counter.</returns>
         CounterInfo RemoveCount(CounterInfo counter);
 

@@ -7,7 +7,6 @@ namespace GolfClapBot.Domain.CommandSettings
     /// </summary>
     public class CommandSettings
     {
-        [JsonIgnore]
-        public string CommandName { get; set; }
+        [JsonIgnore] public string CommandName { get; set; }
     }
 }

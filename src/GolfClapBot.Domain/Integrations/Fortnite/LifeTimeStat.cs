@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace GolfClapBot.Domain.Integrations.Fortnite
 {
     public class LifeTimeStat

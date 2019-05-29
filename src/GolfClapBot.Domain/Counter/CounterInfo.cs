@@ -1,7 +1,7 @@
 ﻿namespace GolfClapBot.Domain.Counter
 {
     /// <summary>
-    /// Properties for CounterService
+    ///     Properties for CounterService
     /// </summary>
     public class CounterInfo
     {

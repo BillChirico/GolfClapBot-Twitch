@@ -23,7 +23,7 @@ namespace GolfClapBot.Service.Integrations.Fortnite
         {
             if (!_client.DefaultRequestHeaders.Contains("TRN-Api-Key"))
                 _client.DefaultRequestHeaders.Add("TRN-Api-Key", _settings.FortniteTrackerApiKey);
-            
+
             var response = await _client.GetAsync($"{_settings.FortnitePlatform}/{_settings.FortniteName}");
 
             if (!response.IsSuccessStatusCode) return null;

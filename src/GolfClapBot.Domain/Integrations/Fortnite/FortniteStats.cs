@@ -4,7 +4,6 @@ namespace GolfClapBot.Domain.Integrations.Fortnite
 {
     public class FortniteStats
     {
-        [JsonProperty("lifeTimeStats")]
-        public LifeTimeStat[] LifeTimeStats { get; set; }
+        [JsonProperty("lifeTimeStats")] public LifeTimeStat[] LifeTimeStats { get; set; }
     }
 }

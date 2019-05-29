@@ -1,7 +1,7 @@
 ﻿namespace GolfClapBot.Domain.Settings
 {
     /// <summary>
-    /// Properties for TwitchBot
+    ///     Properties for TwitchBot
     /// </summary>
     public class TwitchSettings
     {
@@ -10,7 +10,7 @@
         public string AccessToken { get; set; }
 
         public string ClientId { get; set; }
-        
+
         public string Channel { get; set; }
     }
 }
